@@ -7,11 +7,11 @@ interface NavProps {
 }
 
 const navItems: { label: string; page: Page }[] = [
+  { label: 'About Us', page: 'about' },
   { label: 'Services', page: 'services' },
-  { label: 'Projects', page: 'projects' },
-  { label: 'About', page: 'about' },
   { label: 'Careers', page: 'careers' },
-  { label: 'Contact', page: 'contact' },
+  { label: 'Contact Us', page: 'contact' },
+  { label: 'Blogs', page: 'blogs' },
 ]
 
 function MtaaniLogo() {
@@ -31,6 +31,7 @@ function MtaaniLogo() {
 
 export default function Nav({ page, navigate }: NavProps) {
   const [open, setOpen] = useState(false)
+  const [projectsOpen, setProjectsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -42,7 +43,10 @@ export default function Nav({ page, navigate }: NavProps) {
   const go = (p: Page) => {
     navigate(p)
     setOpen(false)
+    setProjectsOpen(false)
   }
+
+  const projectsActive = page === 'projects' || page === 'client-projects' || page === 'innovations'
 
   return (
     <nav className={`sticky top-0 z-50 bg-white transition-shadow duration-300 ${scrolled ? 'shadow-md shadow-black/5' : 'shadow-sm shadow-black/3'}`}>
@@ -62,20 +66,34 @@ export default function Nav({ page, navigate }: NavProps) {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-0.5">
-          {navItems.map(item => (
-            <button
-              key={item.page}
-              onClick={() => go(item.page)}
-              className={`relative text-[13.5px] font-medium px-3.5 py-2 transition-colors rounded-md ${
-                page === item.page
-                  ? 'text-primary'
-                  : 'text-foreground/70 hover:text-foreground'
-              }`}
-            >
+          {navItems.slice(0, 2).map(item => (
+            <button key={item.page} onClick={() => go(item.page)} className={`relative text-[13.5px] font-medium px-3.5 py-2 transition-colors rounded-md ${page === item.page ? 'text-primary' : 'text-foreground/70 hover:text-foreground'}`}>
               {item.label}
-              {page === item.page && (
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-primary rounded-full" />
-              )}
+              {page === item.page && <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-primary rounded-full" />}
+            </button>
+          ))}
+          <div className="relative" onMouseEnter={() => setProjectsOpen(true)} onMouseLeave={() => setProjectsOpen(false)}>
+            <button
+              onClick={() => setProjectsOpen(value => !value)}
+              aria-expanded={projectsOpen}
+              className={`relative text-[13.5px] font-medium px-3.5 py-2 transition-colors rounded-md ${projectsActive ? 'text-primary' : 'text-foreground/70 hover:text-foreground'}`}
+            >
+              Projects <span className="ml-1 text-xs">⌄</span>
+              {projectsActive && <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-primary rounded-full" />}
+            </button>
+            {projectsOpen && (
+              <div className="absolute left-0 top-full pt-2 w-52">
+                <div className="rounded-xl border border-border bg-white p-2 shadow-xl">
+                  <button onClick={() => go('client-projects')} className="block w-full rounded-lg px-3 py-2 text-left text-sm text-foreground hover:bg-secondary">For Our Clients</button>
+                  <button onClick={() => go('innovations')} className="block w-full rounded-lg px-3 py-2 text-left text-sm text-foreground hover:bg-secondary">Our Innovations</button>
+                </div>
+              </div>
+            )}
+          </div>
+          {navItems.slice(2).map(item => (
+            <button key={item.page} onClick={() => go(item.page)} className={`relative text-[13.5px] font-medium px-3.5 py-2 transition-colors rounded-md ${page === item.page ? 'text-primary' : 'text-foreground/70 hover:text-foreground'}`}>
+              {item.label}
+              {page === item.page && <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-primary rounded-full" />}
             </button>
           ))}
         </div>
@@ -112,7 +130,7 @@ export default function Nav({ page, navigate }: NavProps) {
       {open && (
         <div className="md:hidden bg-white border-t border-border px-5 py-4 shadow-lg">
           <div className="flex flex-col gap-1">
-            {navItems.map(item => (
+            {navItems.slice(0, 2).map(item => (
               <button
                 key={item.page}
                 onClick={() => go(item.page)}
@@ -122,6 +140,20 @@ export default function Nav({ page, navigate }: NavProps) {
                     : 'text-foreground hover:bg-secondary'
                 }`}
               >
+                {item.label}
+              </button>
+            ))}
+            <button onClick={() => setProjectsOpen(value => !value)} className={`text-sm font-medium text-left px-4 py-3 rounded-xl transition-colors ${projectsActive ? 'text-primary bg-primary/8 font-semibold' : 'text-foreground hover:bg-secondary'}`} aria-expanded={projectsOpen}>
+              Projects <span className="float-right">⌄</span>
+            </button>
+            {projectsOpen && (
+              <div className="ml-4 flex flex-col gap-1 border-l border-border pl-3">
+                <button onClick={() => go('client-projects')} className="text-left px-3 py-2 text-sm text-muted-foreground hover:text-primary">For Our Clients</button>
+                <button onClick={() => go('innovations')} className="text-left px-3 py-2 text-sm text-muted-foreground hover:text-primary">Our Innovations</button>
+              </div>
+            )}
+            {navItems.slice(2).map(item => (
+              <button key={item.page} onClick={() => go(item.page)} className={`text-sm font-medium text-left px-4 py-3 rounded-xl transition-colors ${page === item.page ? 'text-primary bg-primary/8 font-semibold' : 'text-foreground hover:bg-secondary'}`}>
                 {item.label}
               </button>
             ))}

@@ -240,13 +240,18 @@ function WasteMockup() {
 const mockups = [QuotationMockup, ChamaMockup, ChatBotMockup, WasteMockup]
 
 /* ─── Component ────────────────────────────────────────────────────────────── */
-export default function ProjectsPage({ navigate }: { navigate: (p: Page) => void }) {
+export default function ProjectsPage({ navigate, view }: { navigate: (p: Page) => void; view?: 'clients' | 'innovations' }) {
   const [filter, setFilter] = useState('All')
   const [selected, setSelected] = useState<string | null>(null)
 
-  const filtered = filter === 'All' ? projects : projects.filter(p => p.category === filter)
+  const visibleProjects = view === 'clients'
+    ? projects.filter(p => p.client === 'Waumini Insurance' || p.client === 'Eco Pearl')
+    : view === 'innovations'
+      ? projects.filter(p => p.client === 'Chama Group Table' || p.client === 'Multiple Clients')
+      : projects
+  const filtered = filter === 'All' ? visibleProjects : visibleProjects.filter(p => p.category === filter)
 
-  const selectedProject = projects.find(p => p.name === selected)
+  const selectedProject = visibleProjects.find(p => p.name === selected)
   const MockupComponent = selectedProject ? mockups[projects.indexOf(selectedProject)] : null
 
   return (
@@ -255,9 +260,9 @@ export default function ProjectsPage({ navigate }: { navigate: (p: Page) => void
       <div className="section-dark text-white">
         <div className="max-w-7xl mx-auto px-6 py-20 md:py-28">
           <span className="font-mono text-[10px] text-primary tracking-widest uppercase">Projects</span>
-          <h1 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight">Technology in action</h1>
+          <h1 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight">{view === 'clients' ? 'For our clients' : view === 'innovations' ? 'Our innovations' : 'Technology in action'}</h1>
           <p className="text-white/50 mt-4 max-w-xl text-lg leading-relaxed">
-            Selected work showing how Mtaanisoft approaches and delivers real-world technical solutions.
+            {view === 'clients' ? 'Selected client work delivered for organizations solving real operational problems.' : view === 'innovations' ? 'Products and systems Mtaanisoft has shaped to make everyday work clearer and more effective.' : 'Selected work showing how Mtaanisoft approaches and delivers real-world technical solutions.'}
           </p>
         </div>
       </div>
@@ -265,7 +270,7 @@ export default function ProjectsPage({ navigate }: { navigate: (p: Page) => void
       <div className="max-w-7xl mx-auto px-6 py-16">
         {/* Filter */}
         <div className="flex flex-wrap gap-2 mb-12">
-          {categories.map(cat => (
+          {!view && categories.map(cat => (
             <button
               key={cat}
               onClick={() => setFilter(cat)}

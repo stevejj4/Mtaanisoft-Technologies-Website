@@ -57,7 +57,7 @@ export default function Footer({ navigate }: FooterProps) {
         <div>
           <h4 className="font-display font-semibold text-white/70 text-xs mb-5 uppercase tracking-wider">Company</h4>
           <ul className="space-y-3">
-            {([['About', 'about'], ['Services', 'services'], ['Projects', 'projects']] as [string, Page][]).map(([label, p]) => (
+            {([['About Us', 'about'], ['Services', 'services'], ['Client Work', 'client-projects'], ['Blogs', 'blogs']] as [string, Page][]).map(([label, p]) => (
               <li key={label}>
                 <button onClick={() => navigate(p)} className="text-sm hover:text-white transition-colors">{label}</button>
               </li>

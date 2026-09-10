@@ -6,15 +6,19 @@ import ProjectsPage from './pages/ProjectsPage'
 import AboutPage from './pages/AboutPage'
 import CareersPage from './pages/CareersPage'
 import ContactPage from './pages/ContactPage'
+import BlogPage from './pages/BlogPage'
 import PrivacyPage from './pages/PrivacyPage'
 import TermsPage from './pages/TermsPage'
 
 export type Page =
   | 'services'
   | 'projects'
+  | 'client-projects'
+  | 'innovations'
   | 'about'
   | 'careers'
   | 'contact'
+  | 'blogs'
   | 'privacy'
   | 'terms'
 
@@ -30,9 +34,12 @@ export default function App() {
     switch (page) {
       case 'services': return <ServicesPage navigate={navigate} />
       case 'projects': return <ProjectsPage navigate={navigate} />
+      case 'client-projects': return <ProjectsPage navigate={navigate} view="clients" />
+      case 'innovations': return <ProjectsPage navigate={navigate} view="innovations" />
       case 'about':    return <AboutPage navigate={navigate} />
       case 'careers':  return <CareersPage navigate={navigate} />
       case 'contact':  return <ContactPage />
+      case 'blogs':    return <BlogPage navigate={navigate} />
       case 'privacy':  return <PrivacyPage navigate={navigate} />
       case 'terms':    return <TermsPage navigate={navigate} />
     }
