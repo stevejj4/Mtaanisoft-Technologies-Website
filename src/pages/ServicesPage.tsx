@@ -43,7 +43,7 @@ const services = [
   {
     title: 'Systems Integration',
     tagline: 'Connecting the tools your business already uses.',
-    desc: 'Modern organizations use multiple platforms and systems. We build the connective layer that makes them work together &mdash; payment gateways, government APIs, third-party SaaS platforms, and internal systems.',
+    desc: 'Modern organizations use multiple platforms and systems. We build the connective layer that makes them work together - payment gateways, government APIs, third-party SaaS platforms, and internal systems.',
     items: [
       'M-Pesa integration and payment systems',
       'Third-party API integration',
@@ -93,9 +93,7 @@ export default function ServicesPage({ navigate }: { navigate: (p: Page) => void
                 </div>
                 <h2 className="font-display text-2xl md:text-3xl font-bold mb-2 tracking-tight">{s.title}</h2>
                 <p className="text-primary font-medium text-sm mb-4">{s.tagline}</p>
-                <p className="text-muted-foreground leading-relaxed text-sm mb-6"
-                  dangerouslySetInnerHTML={{ __html: s.desc }}
-                />
+                <p className="text-muted-foreground leading-relaxed text-sm mb-6">{s.desc}</p>
               </div>
               <div className={`border border-border rounded-lg p-6 bg-card ${i % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}`}>
                 <h3 className="font-display font-semibold text-sm mb-4 text-muted-foreground uppercase tracking-wider">What this includes</h3>

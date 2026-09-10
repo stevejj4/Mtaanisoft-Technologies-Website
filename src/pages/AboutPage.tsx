@@ -15,7 +15,7 @@ const values = [
   },
   {
     title: 'Local context, global standards',
-    desc: 'We build for African markets &mdash; M-Pesa integrations, low-bandwidth environments, multilingual requirements &mdash; while maintaining engineering quality that meets international standards.',
+    desc: 'We build for African markets - M-Pesa integrations, low-bandwidth environments, and multilingual requirements - while maintaining engineering quality that meets international standards.',
   },
 ]
 
@@ -50,9 +50,12 @@ export default function AboutPage({ navigate }: { navigate: (p: Page) => void })
             <div className="animate-ideate mb-5 mt-6 text-sm font-display font-semibold tracking-tight text-white/80 md:hidden">
               Innovate, Ideate
             </div>
-            <h1 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight leading-tight">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold mt-3 tracking-tight leading-tight">
               Practical technology for a stronger tomorrow.
             </h1>
+            <p className="mt-5 max-w-lg text-sm leading-relaxed text-white/75 md:text-base">
+              We build software, automate workflows, and connect the systems that help organizations operate with clarity and confidence.
+            </p>
             <div className="flex flex-wrap gap-3 mt-8">
               <button onClick={() => navigate('contact')} className="btn-primary">Start a Project</button>
               <a href="#who-we-are" className="inline-flex items-center gap-2 border border-white/25 text-white font-semibold px-5 py-3 rounded-full hover:bg-white/10 transition-colors text-sm">
@@ -65,10 +68,15 @@ export default function AboutPage({ navigate }: { navigate: (p: Page) => void })
 
       <section className="bg-white border-b border-border py-10">
         <p className="text-center font-mono text-[10px] text-muted-foreground uppercase tracking-widest mb-5">Trusted by organizations</p>
-        <div className="overflow-hidden">
+        <div className="sr-only">
+          <ul>
+            {clients.map(client => <li key={client}>{client}</li>)}
+          </ul>
+        </div>
+        <div className="overflow-hidden" aria-hidden="true">
           <div className="flex animate-marquee w-max">
             {[...clients, ...clients, ...clients, ...clients].map((client, index) => (
-              <div key={`${client}-${index}`} className="px-8 md:px-12 py-2 border-r border-border flex-shrink-0 font-display font-semibold text-sm text-foreground whitespace-nowrap">
+              <div key={`${client}-${index}`} className="px-8 md:px-12 py-2 border-r border-border shrink-0 font-display font-semibold text-sm text-foreground whitespace-nowrap">
                 {client}
               </div>
             ))}
@@ -77,11 +85,16 @@ export default function AboutPage({ navigate }: { navigate: (p: Page) => void })
       </section>
 
       <section className="bg-secondary/40 border-b border-border py-8">
-        <p className="text-center font-mono text-[10px] text-primary uppercase tracking-widest mb-5">Five areas we make progress possible</p>
-        <div className="overflow-hidden">
+        <p className="text-center font-mono text-[10px] text-primary uppercase tracking-widest mb-5">Five ways we create progress</p>
+        <div className="sr-only">
+          <ul>
+            {focusAreas.map(area => <li key={area}>{area}</li>)}
+          </ul>
+        </div>
+        <div className="overflow-hidden" aria-hidden="true">
           <div className="flex animate-marquee-reverse w-max">
             {[...focusAreas, ...focusAreas, ...focusAreas, ...focusAreas].map((area, index) => (
-              <div key={`${area}-${index}`} className="px-8 md:px-12 py-2 border-r border-primary/15 flex-shrink-0 font-display font-semibold text-sm text-foreground whitespace-nowrap">
+              <div key={`${area}-${index}`} className="px-8 md:px-12 py-2 border-r border-primary/15 shrink-0 font-display font-semibold text-sm text-foreground whitespace-nowrap">
                 <span className="text-primary mr-2">✦</span>{area}
               </div>
             ))}
@@ -125,7 +138,7 @@ export default function AboutPage({ navigate }: { navigate: (p: Page) => void })
               <div key={v.title} className="bg-card border border-border rounded-lg p-6">
                 <div className="w-1.5 h-1.5 rounded-full bg-primary mb-4" />
                 <h3 className="font-display font-semibold text-lg mb-2">{v.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: v.desc }} />
+                <p className="text-muted-foreground text-sm leading-relaxed">{v.desc}</p>
               </div>
             ))}
           </div>
@@ -141,7 +154,7 @@ export default function AboutPage({ navigate }: { navigate: (p: Page) => void })
             <p className="text-muted-foreground text-sm leading-relaxed mt-5">
               Digital transformation is not simply adding new tools. It is understanding people, workflows, and the operational problem first, then building technology that fits the organization.
             </p>
-            <button onClick={() => navigate('services')} className="btn-outline mt-7 text-sm">Read more about our approach</button>
+            <button onClick={() => navigate('blogs')} className="btn-outline mt-7 text-sm">Read more about our approach</button>
           </div>
         </div>
       </section>

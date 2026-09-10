@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
 import ServicesPage from './pages/ServicesPage'
@@ -22,11 +22,36 @@ export type Page =
   | 'privacy'
   | 'terms'
 
+const pathByPage: Record<Page, string> = {
+  about: '/',
+  services: '/services',
+  projects: '/projects',
+  'client-projects': '/projects/clients',
+  innovations: '/projects/innovations',
+  careers: '/careers',
+  contact: '/contact',
+  blogs: '/blogs',
+  privacy: '/privacy',
+  terms: '/terms',
+}
+
+function pageFromPath(pathname: string): Page {
+  const match = (Object.entries(pathByPage) as [Page, string][]).find(([, path]) => path === pathname)
+  return match?.[0] ?? 'about'
+}
+
 export default function App() {
-  const [page, setPage] = useState<Page>('about')
+  const [page, setPage] = useState<Page>(() => pageFromPath(window.location.pathname))
+
+  useEffect(() => {
+    const handlePopState = () => setPage(pageFromPath(window.location.pathname))
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [])
 
   const navigate = (p: Page) => {
     setPage(p)
+    window.history.pushState({}, '', pathByPage[p])
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
