@@ -24,7 +24,7 @@ const clients = ['Waumini Insurance', 'Eco Pearl', 'Group Table Banking', 'Multi
 const focusAreas = [
   'Software Development',
   'Digital Transformation',
-  'Automation',
+  'Automation and AI Adoption',
   'Data Solutions',
   'Systems Integration',
 ]
