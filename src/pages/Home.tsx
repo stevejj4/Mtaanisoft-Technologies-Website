@@ -157,9 +157,17 @@ export default function Home({ navigate }: { navigate: (p: Page) => void }) {
     <div className="overflow-x-hidden">
 
       {/* ══════════════════════════════════ HERO ══════════════════════════════════ */}
-      <section className="bg-white overflow-hidden">
+      <section className="relative bg-white overflow-hidden">
+        <div className="absolute inset-0 md:hidden" aria-hidden="true">
+          <img
+            src={heroPhoto}
+            alt=""
+            className="h-full w-full object-cover object-center opacity-25"
+          />
+          <div className="absolute inset-0 bg-white/75" />
+        </div>
         <div className="max-w-7xl mx-auto px-6 md:px-8 pt-14 pb-0">
-          <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="relative z-10 grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
 
             {/* Left — text */}
             <div className="pb-16">
