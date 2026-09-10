@@ -38,7 +38,7 @@ export default function AboutPage({ navigate }: { navigate: (p: Page) => void })
         <div className="absolute inset-0 md:left-1/2">
           <img src={heroPhoto} alt="Mtaanisoft Technologies professional at work" className="h-full w-full object-cover object-center opacity-45" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0B1D3E] via-[#0B1D3E]/90 to-[#0B1D3E]/20" />
-          <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 hidden items-center justify-center overflow-hidden md:flex">
             <div className="animate-ideate whitespace-nowrap text-white/80 text-2xl md:text-4xl font-display font-semibold tracking-tight">
               Innovate, Ideate
             </div>
@@ -47,20 +47,23 @@ export default function AboutPage({ navigate }: { navigate: (p: Page) => void })
         <div className="relative max-w-7xl mx-auto px-6 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
           <div className="max-w-xl">
             <span className="font-mono text-xs text-primary tracking-widest uppercase">About</span>
+            <div className="animate-ideate mb-5 mt-6 text-sm font-display font-semibold tracking-tight text-white/80 md:hidden">
+              Innovate, Ideate
+            </div>
             <h1 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight leading-tight">
               Practical technology for a stronger tomorrow.
             </h1>
             <div className="flex flex-wrap gap-3 mt-8">
               <button onClick={() => navigate('contact')} className="btn-primary">Start a Project</button>
               <a href="#who-we-are" className="inline-flex items-center gap-2 border border-white/25 text-white font-semibold px-5 py-3 rounded-full hover:bg-white/10 transition-colors text-sm">
-                Who we are <span aria-hidden="true">↓</span>
+                Who We Are <span aria-hidden="true">↓</span>
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-white border-b border-border py-8">
+      <section className="bg-white border-b border-border py-10">
         <p className="text-center font-mono text-[10px] text-muted-foreground uppercase tracking-widest mb-5">Trusted by organizations</p>
         <div className="overflow-hidden">
           <div className="flex animate-marquee w-max">
