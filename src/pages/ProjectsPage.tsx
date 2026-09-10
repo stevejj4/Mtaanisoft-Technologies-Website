@@ -46,7 +46,7 @@ const projects = [
   },
   {
     client: 'Multiple Clients',
-    name: 'Customer Support Chat Bots',
+    name: 'Chatbot and NLP Projects.',
     sector: 'Customer Experience',
     category: 'Systems Integration',
     year: '2025–2026',
@@ -260,7 +260,7 @@ export default function ProjectsPage({ navigate, view }: { navigate: (p: Page) =
       <div className="section-dark text-white">
         <div className="max-w-7xl mx-auto px-6 py-20 md:py-28">
           <span className="font-mono text-[10px] text-primary tracking-widest uppercase">Projects</span>
-          <h1 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight">{view === 'clients' ? 'For our clients' : view === 'innovations' ? 'Our innovations' : 'Technology in action'}</h1>
+          <h1 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight">{view === 'clients' ? 'For our clients' : view === 'innovations' ? 'Our innovations' : 'Our Projects'}</h1>
           <p className="text-white/50 mt-4 max-w-xl text-lg leading-relaxed">
             {view === 'clients' ? 'Selected client work delivered for organizations solving real operational problems.' : view === 'innovations' ? 'Products and systems Mtaanisoft has shaped to make everyday work clearer and more effective.' : 'Selected work showing how Mtaanisoft approaches and delivers real-world technical solutions.'}
           </p>
@@ -378,9 +378,9 @@ export default function ProjectsPage({ navigate, view }: { navigate: (p: Page) =
                         </div>
                         <button
                           onClick={() => navigate('contact')}
-                          className="w-full border border-border rounded-xl py-2.5 text-sm font-medium text-foreground hover:bg-secondary/60 transition-colors mt-auto"
+                          className="w-full border border-border rounded-xl py-2.5 text-sm font-medium text-foreground hover:bg-secondary/60 transition-colors mt-auto inline-flex items-center justify-center gap-2"
                         >
-                          Build something similar &rarr;
+                          Read More <span aria-hidden="true">&rarr;</span>
                         </button>
                       </div>
                     </div>
