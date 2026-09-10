@@ -1,0 +1,11 @@
+{
+	"title": "Mtaanisoft Technologies | Digital Solutions for African Organizations",
+	"description": "Mtaanisoft Technologies builds practical software, automation, data, and digital transformation solutions for organizations in Kenya and across East Africa.",
+	"language": "en",
+	"robots": {
+		"index": true
+	},
+	"openGraph": {
+		"image": "https://mtaanisoft.co.ke/og-image.png"
+	}
+}
