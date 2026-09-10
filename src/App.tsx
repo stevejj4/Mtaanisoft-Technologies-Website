@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
-import Home from './pages/Home'
 import ServicesPage from './pages/ServicesPage'
 import ProjectsPage from './pages/ProjectsPage'
 import AboutPage from './pages/AboutPage'
@@ -11,7 +10,6 @@ import PrivacyPage from './pages/PrivacyPage'
 import TermsPage from './pages/TermsPage'
 
 export type Page =
-  | 'home'
   | 'services'
   | 'projects'
   | 'about'
@@ -21,7 +19,7 @@ export type Page =
   | 'terms'
 
 export default function App() {
-  const [page, setPage] = useState<Page>('home')
+  const [page, setPage] = useState<Page>('about')
 
   const navigate = (p: Page) => {
     setPage(p)
@@ -30,7 +28,6 @@ export default function App() {
 
   const renderPage = () => {
     switch (page) {
-      case 'home':     return <Home navigate={navigate} />
       case 'services': return <ServicesPage navigate={navigate} />
       case 'projects': return <ProjectsPage navigate={navigate} />
       case 'about':    return <AboutPage navigate={navigate} />

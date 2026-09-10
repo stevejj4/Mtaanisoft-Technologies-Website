@@ -7,7 +7,6 @@ interface NavProps {
 }
 
 const navItems: { label: string; page: Page }[] = [
-  { label: 'Home', page: 'home' },
   { label: 'Services', page: 'services' },
   { label: 'Projects', page: 'projects' },
   { label: 'About', page: 'about' },
@@ -50,7 +49,7 @@ export default function Nav({ page, navigate }: NavProps) {
       <div className="max-w-7xl mx-auto px-5 md:px-8 flex items-center justify-between h-[68px]">
 
         {/* Logo */}
-        <button onClick={() => go('home')} className="flex items-center gap-3 group shrink-0">
+        <button onClick={() => go('about')} className="flex items-center gap-3 group shrink-0">
           <MtaaniLogo />
           <div className="flex flex-col leading-none">
             <span className="font-display font-bold text-[16px] text-foreground tracking-tight">Mtaanisoft</span>

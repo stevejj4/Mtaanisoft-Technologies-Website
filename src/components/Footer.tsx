@@ -25,7 +25,7 @@ export default function Footer({ navigate }: FooterProps) {
       <div className="max-w-7xl mx-auto px-6 md:px-8 py-16 grid grid-cols-2 md:grid-cols-5 gap-10">
         {/* Brand */}
         <div className="col-span-2">
-          <button onClick={() => navigate('home')} className="flex items-center gap-3 mb-5">
+          <button onClick={() => navigate('about')} className="flex items-center gap-3 mb-5">
             <MtaaniLogo />
             <div className="flex flex-col leading-none">
               <span className="font-display font-bold text-[15px] text-white tracking-tight">Mtaanisoft</span>

@@ -19,24 +19,81 @@ const values = [
   },
 ]
 
+const clients = ['Waumini Insurance', 'Eco Pearl', 'Group Table Banking', 'Multiple Clients']
+
+const focusAreas = [
+  'Software Development',
+  'Digital Transformation',
+  'Automation',
+  'Data Solutions',
+  'Systems Integration',
+]
+
+const workSteps = [
+  { n: '01', title: 'Discover', desc: 'Understand goals, users, and real operational workflows.' },
+  { n: '02', title: 'Define', desc: 'Translate requirements into clear technical specifications.' },
+  { n: '03', title: 'Build', desc: 'Design, develop, integrate, and test end to end.' },
+  { n: '04', title: 'Deploy', desc: 'Release to production with full documentation.' },
+  { n: '05', title: 'Support', desc: 'Monitor and improve the system after launch.' },
+]
+
 export default function AboutPage({ navigate }: { navigate: (p: Page) => void }) {
+  const heroPhoto = 'https://images.unsplash.com/photo-1604933762021-54a5858c9832?w=1200&h=900&fit=crop&auto=format'
+
   return (
-    <div>
-      <div className="section-dark text-white">
-        <div className="max-w-7xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-16 items-end">
-          <div>
+    <div className="overflow-x-hidden">
+      <section className="relative section-dark text-white overflow-hidden">
+        <div className="absolute inset-0 md:left-1/2">
+          <img src={heroPhoto} alt="Mtaanisoft Technologies professional at work" className="h-full w-full object-cover object-center opacity-45" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0B1D3E] via-[#0B1D3E]/90 to-[#0B1D3E]/20" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-6 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
+          <div className="max-w-xl">
             <span className="font-mono text-xs text-primary tracking-widest uppercase">About</span>
             <h1 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight leading-tight">
-              Technology should solve real problems.
+              Practical technology for a stronger tomorrow.
             </h1>
-          </div>
-          <div>
-            <p className="text-gray-400 text-lg leading-relaxed">
-              Mtaanisoft Technologies is a Kenyan technology company focused on practical digital transformation and software solutions that improve how organizations operate.
+            <p className="text-gray-300 text-base md:text-lg leading-relaxed mt-6 max-w-lg">
+              Mtaanisoft Technologies is a Kenyan technology company helping organizations turn complex operational problems into clear, useful digital systems.
             </p>
+            <p className="text-gray-400 text-sm leading-relaxed mt-4 max-w-lg">
+              We work alongside businesses and institutions across Kenya and East Africa to understand how work really happens, then build solutions people can use and organizations can sustain.
+            </p>
+            <div className="flex flex-wrap gap-3 mt-8">
+              <button onClick={() => navigate('contact')} className="btn-primary">Start a Project</button>
+              <a href="#how-we-work" className="inline-flex items-center gap-2 border border-white/25 text-white font-semibold px-5 py-3 rounded-full hover:bg-white/10 transition-colors text-sm">
+                How we work <span aria-hidden="true">↓</span>
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      <section className="bg-white border-b border-border py-8">
+        <p className="text-center font-mono text-[10px] text-muted-foreground uppercase tracking-widest mb-5">Trusted by organizations</p>
+        <div className="overflow-hidden">
+          <div className="flex animate-marquee w-max">
+            {[...clients, ...clients, ...clients, ...clients].map((client, index) => (
+              <div key={`${client}-${index}`} className="px-8 md:px-12 py-2 border-r border-border flex-shrink-0 font-display font-semibold text-sm text-foreground whitespace-nowrap">
+                {client}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-secondary/40 border-b border-border py-8">
+        <p className="text-center font-mono text-[10px] text-primary uppercase tracking-widest mb-5">Five areas we make progress possible</p>
+        <div className="overflow-hidden">
+          <div className="flex animate-marquee-reverse w-max">
+            {[...focusAreas, ...focusAreas, ...focusAreas, ...focusAreas].map((area, index) => (
+              <div key={`${area}-${index}`} className="px-8 md:px-12 py-2 border-r border-primary/15 flex-shrink-0 font-display font-semibold text-sm text-foreground whitespace-nowrap">
+                <span className="text-primary mr-2">✦</span>{area}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Mission, Vision, Philosophy */}
       <section className="py-20 border-b border-border">
@@ -112,6 +169,26 @@ export default function AboutPage({ navigate }: { navigate: (p: Page) => void })
                   <div className="font-display font-semibold text-sm mb-0.5">{item.title}</div>
                   <div className="text-muted-foreground text-sm">{item.desc}</div>
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="how-we-work" className="py-20 bg-white border-t border-border scroll-mt-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-14 text-center">
+            <div className="w-8 h-1 bg-primary rounded-full mx-auto mb-4" />
+            <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight">How we work</h2>
+            <p className="text-muted-foreground mt-3 text-sm max-w-lg mx-auto">End-to-end delivery from discovery through production and ongoing support.</p>
+          </div>
+          <div className="relative grid md:grid-cols-5 gap-6 md:gap-3">
+            <div className="hidden md:block absolute top-5 left-5 right-5 h-px bg-border" />
+            {workSteps.map(step => (
+              <div key={step.n} className="relative text-center md:text-left">
+                <div className="w-10 h-10 rounded-full border-2 border-primary bg-white flex items-center justify-center font-mono text-xs font-bold text-primary mb-4 relative z-10 shadow-sm mx-auto md:mx-0">{step.n}</div>
+                <h3 className="font-display font-semibold text-base mb-1">{step.title}</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
