@@ -96,7 +96,7 @@ To exercise any of these rights, contact us at: **privacy@mtaanisoft.co.ke**`,
 **Mtaanisoft Technologies**
 Nairobi, Kenya
 Email: **privacy@mtaanisoft.co.ke**
-Phone: +254 700 000 000`,
+Phone: +254 793 658 882`,
   },
 ]
 
