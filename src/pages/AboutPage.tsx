@@ -50,11 +50,11 @@ export default function AboutPage({ navigate }: { navigate: (p: Page) => void })
             <h1 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight leading-tight">
               Practical technology for a stronger tomorrow.
             </h1>
-            <p className="text-gray-300 text-base md:text-lg leading-relaxed mt-6 max-w-lg">
-              Mtaanisoft Technologies is a Kenyan technology company helping organizations turn complex operational problems into clear, useful digital systems.
-            </p>
             <div className="flex flex-wrap gap-3 mt-8">
               <button onClick={() => navigate('contact')} className="btn-primary">Start a Project</button>
+              <a href="#who-we-are" className="inline-flex items-center gap-2 border border-white/25 text-white font-semibold px-5 py-3 rounded-full hover:bg-white/10 transition-colors text-sm">
+                Who we are <span aria-hidden="true">↓</span>
+              </a>
             </div>
           </div>
         </div>
@@ -144,10 +144,10 @@ export default function AboutPage({ navigate }: { navigate: (p: Page) => void })
       </section>
 
       {/* Location */}
-      <section className="py-20 bg-[#0C0F17] text-white">
+      <section id="who-we-are" className="py-20 bg-[#0C0F17] text-white scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <span className="font-mono text-xs text-primary tracking-widest uppercase">Where we are</span>
+            <span className="font-mono text-xs text-primary tracking-widest uppercase">Who we are</span>
             <h2 className="font-display text-3xl font-bold mt-3 mb-5 tracking-tight">
               Based in Nairobi, working across Kenya and beyond.
             </h2>

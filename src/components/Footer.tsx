@@ -89,12 +89,12 @@ export default function Footer({ navigate }: FooterProps) {
               </a>
             </li>
             <li>
-              <a href="tel:+254793658882" className="text-sm hover:text-white transition-colors block">
+              <a href="https://wa.me/254793658882" target="_blank" rel="noreferrer" className="text-sm hover:text-white transition-colors block">
                 +254 793 658 882
               </a>
             </li>
             <li>
-              <a href="tel:+254748144900" className="text-sm hover:text-white transition-colors block">
+              <a href="https://wa.me/254748144900" target="_blank" rel="noreferrer" className="text-sm hover:text-white transition-colors block">
                 +254 748 144 900
               </a>
             </li>
