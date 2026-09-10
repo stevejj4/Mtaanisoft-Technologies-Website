@@ -29,14 +29,6 @@ const focusAreas = [
   'Systems Integration',
 ]
 
-const workSteps = [
-  { n: '01', title: 'Discover', desc: 'Understand goals, users, and real operational workflows.' },
-  { n: '02', title: 'Define', desc: 'Translate requirements into clear technical specifications.' },
-  { n: '03', title: 'Build', desc: 'Design, develop, integrate, and test end to end.' },
-  { n: '04', title: 'Deploy', desc: 'Release to production with full documentation.' },
-  { n: '05', title: 'Support', desc: 'Monitor and improve the system after launch.' },
-]
-
 export default function AboutPage({ navigate }: { navigate: (p: Page) => void }) {
   const heroPhoto = 'https://images.unsplash.com/photo-1604933762021-54a5858c9832?w=1200&h=900&fit=crop&auto=format'
 
@@ -46,6 +38,11 @@ export default function AboutPage({ navigate }: { navigate: (p: Page) => void })
         <div className="absolute inset-0 md:left-1/2">
           <img src={heroPhoto} alt="Mtaanisoft Technologies professional at work" className="h-full w-full object-cover object-center opacity-45" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0B1D3E] via-[#0B1D3E]/90 to-[#0B1D3E]/20" />
+          <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+            <div className="animate-ideate whitespace-nowrap text-white/80 text-2xl md:text-4xl font-display font-semibold tracking-tight">
+              Innovate, Ideate
+            </div>
+          </div>
         </div>
         <div className="relative max-w-7xl mx-auto px-6 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
           <div className="max-w-xl">
@@ -56,14 +53,8 @@ export default function AboutPage({ navigate }: { navigate: (p: Page) => void })
             <p className="text-gray-300 text-base md:text-lg leading-relaxed mt-6 max-w-lg">
               Mtaanisoft Technologies is a Kenyan technology company helping organizations turn complex operational problems into clear, useful digital systems.
             </p>
-            <p className="text-gray-400 text-sm leading-relaxed mt-4 max-w-lg">
-              We work alongside businesses and institutions across Kenya and East Africa to understand how work really happens, then build solutions people can use and organizations can sustain.
-            </p>
             <div className="flex flex-wrap gap-3 mt-8">
               <button onClick={() => navigate('contact')} className="btn-primary">Start a Project</button>
-              <a href="#how-we-work" className="inline-flex items-center gap-2 border border-white/25 text-white font-semibold px-5 py-3 rounded-full hover:bg-white/10 transition-colors text-sm">
-                How we work <span aria-hidden="true">↓</span>
-              </a>
             </div>
           </div>
         </div>
@@ -138,59 +129,16 @@ export default function AboutPage({ navigate }: { navigate: (p: Page) => void })
         </div>
       </section>
 
-      {/* Digital transformation approach */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-          <div>
-            <span className="font-mono text-xs text-primary tracking-widest uppercase">Digital transformation</span>
-            <h2 className="font-display text-3xl font-bold mt-3 mb-5 tracking-tight">
-              Transformation is not just about technology.
-            </h2>
-            <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-              Many organizations have been through expensive technology projects that failed to deliver value. The reason is usually not the technology &mdash; it is that the technology was implemented without deeply understanding the operational reality it was supposed to change.
-            </p>
-            <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-              At Mtaanisoft, we start with the operational problem. We spend time understanding workflows, incentive structures, data quality, and the people who will use the system before we propose a solution.
-            </p>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Technology is the last step, not the first.
-            </p>
-          </div>
-          <div className="space-y-4">
-            {[
-              { step: '01', title: 'Operational understanding first', desc: 'We map existing processes before designing technical solutions.' },
-              { step: '02', title: 'Right-sized solutions', desc: 'We match solution complexity to organizational capacity and context.' },
-              { step: '03', title: 'Adoption-focused delivery', desc: 'We design for the humans who will use the system, not just the technical requirements.' },
-              { step: '04', title: 'Sustained support', desc: 'We remain available after launch to iterate, fix issues, and improve.' },
-            ].map(item => (
-              <div key={item.step} className="flex gap-4">
-                <div className="font-mono text-xs text-primary/60 pt-0.5 w-8 flex-shrink-0">{item.step}</div>
-                <div>
-                  <div className="font-display font-semibold text-sm mb-0.5">{item.title}</div>
-                  <div className="text-muted-foreground text-sm">{item.desc}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="how-we-work" className="py-20 bg-white border-t border-border scroll-mt-20">
+      {/* Blog feature */}
+      <section className="py-20 bg-white border-t border-border">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-14 text-center">
-            <div className="w-8 h-1 bg-primary rounded-full mx-auto mb-4" />
-            <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight">How we work</h2>
-            <p className="text-muted-foreground mt-3 text-sm max-w-lg mx-auto">End-to-end delivery from discovery through production and ongoing support.</p>
-          </div>
-          <div className="relative grid md:grid-cols-5 gap-6 md:gap-3">
-            <div className="hidden md:block absolute top-5 left-5 right-5 h-px bg-border" />
-            {workSteps.map(step => (
-              <div key={step.n} className="relative text-center md:text-left">
-                <div className="w-10 h-10 rounded-full border-2 border-primary bg-white flex items-center justify-center font-mono text-xs font-bold text-primary mb-4 relative z-10 shadow-sm mx-auto md:mx-0">{step.n}</div>
-                <h3 className="font-display font-semibold text-base mb-1">{step.title}</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">{step.desc}</p>
-              </div>
-            ))}
+          <div className="max-w-2xl">
+            <span className="font-mono text-xs text-primary tracking-widest uppercase">From our blog</span>
+            <h2 className="font-display text-3xl md:text-4xl font-bold mt-3 tracking-tight">Transformation starts with understanding.</h2>
+            <p className="text-muted-foreground text-sm leading-relaxed mt-5">
+              Digital transformation is not simply adding new tools. It is understanding people, workflows, and the operational problem first, then building technology that fits the organization.
+            </p>
+            <button onClick={() => navigate('services')} className="btn-outline mt-7 text-sm">Read more about our approach</button>
           </div>
         </div>
       </section>
