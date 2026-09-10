@@ -151,10 +151,10 @@ export default function AboutPage({ navigate }: { navigate: (p: Page) => void })
             <h2 className="font-display text-3xl font-bold mt-3 mb-5 tracking-tight">
               Based in Nairobi, working across Kenya and beyond.
             </h2>
-            <p className="text-gray-400 text-sm leading-relaxed mb-6">
+            <p className="text-gray-300 text-sm leading-relaxed mb-6">
               Mtaanisoft Technologies operates from Nairobi, Kenya. We work with clients across Kenya and East Africa, and we have a distributed contributor network of technical specialists.
             </p>
-            <p className="text-gray-400 text-sm leading-relaxed">
+            <p className="text-gray-300 text-sm leading-relaxed">
               We understand Kenyan business environments, regulatory contexts, and the technical infrastructure realities that shape what solutions actually work here.
             </p>
           </div>
@@ -165,21 +165,21 @@ export default function AboutPage({ navigate }: { navigate: (p: Page) => void })
               { label: 'Remote-first', sub: 'Contributor model' },
               { label: 'Since 2023', sub: 'In operation' },
             ].map(item => (
-              <div key={item.label} className="border border-gray-800 rounded-lg p-5">
+              <div key={item.label} className="border border-gray-800 rounded-lg p-5 min-h-28 flex flex-col justify-center">
                 <div className="font-display font-semibold text-white mb-1">{item.label}</div>
-                <div className="text-xs font-mono text-gray-600">{item.sub}</div>
+                <div className="text-xs font-mono text-white/70">{item.sub}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-primary">
+      <section className="py-24 md:py-28 bg-primary">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h2 className="font-display text-3xl font-bold text-white mb-4 tracking-tight">
             Work with Mtaanisoft
           </h2>
-          <p className="text-emerald-100 mb-8 max-w-md mx-auto text-sm">
+          <p className="text-white/85 mb-8 max-w-md mx-auto text-sm">
             Whether you are a client with a project or a technical contributor looking for meaningful work.
           </p>
           <div className="flex flex-wrap justify-center gap-4">

@@ -50,7 +50,7 @@ export default function Nav({ page, navigate }: NavProps) {
 
   return (
     <nav className={`sticky top-0 z-50 bg-white transition-shadow duration-300 ${scrolled ? 'shadow-md shadow-black/5' : 'shadow-sm shadow-black/3'}`}>
-      <div className="max-w-7xl mx-auto px-5 md:px-8 flex items-center justify-between h-[68px]">
+      <div className="max-w-7xl mx-auto px-5 md:px-8 flex items-center justify-between min-h-19 py-2">
 
         {/* Logo */}
         <button onClick={() => go('about')} className="flex items-center gap-3 group shrink-0">

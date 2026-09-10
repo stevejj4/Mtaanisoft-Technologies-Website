@@ -37,29 +37,47 @@ export default function ContactPage() {
 
   return (
     <div>
-      <div className="hero-mesh dot-grid text-white">
-        <div className="max-w-7xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-16 items-end">
+      <div className="hero-mesh dot-grid text-foreground">
+        <div className="max-w-7xl mx-auto px-6 py-24 md:py-28 grid md:grid-cols-2 gap-16 items-end">
           <div>
             <span className="font-mono text-xs text-primary tracking-widest uppercase">Start a Project</span>
             <h1 className="font-display text-4xl md:text-5xl font-bold mt-3 tracking-tight">
               Tell us what you are building.
             </h1>
-            <p className="text-gray-400 mt-4 text-lg leading-relaxed">
+            <p className="text-slate-700 mt-4 text-lg leading-relaxed">
               Complete the brief below and we will respond within 48 hours with an initial assessment.
             </p>
           </div>
           <div className="space-y-5">
             {[
-              { icon: '📧', label: 'Email', value: 'hello@mtaanisoft.co.ke' },
-              { icon: '📞', label: 'Primary', value: '+254 793 658 882' },
-              { icon: '📞', label: 'Alternative', value: '+254 748 144 900' },
-              { icon: '📍', label: 'Location', value: 'Nairobi, Kenya' },
+              { icon: 'email', label: 'Email', value: 'hello@mtaanisoft.co.ke' },
+              { icon: 'phone', label: 'Primary', value: '+254 793 658 882' },
+              { icon: 'phone', label: 'Alternative', value: '+254 748 144 900' },
+              { icon: 'location', label: 'Location', value: 'Nairobi, Kenya' },
             ].map(c => (
               <div key={c.label} className="flex items-center gap-3">
-                <span className="text-lg">{c.icon}</span>
+                <span className="w-9 h-9 rounded-full bg-primary/10 text-primary flex items-center justify-center" aria-hidden="true">
+                  {c.icon === 'email' && (
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 7.5A2.5 2.5 0 015.5 5h13A2.5 2.5 0 0121 7.5v9a2.5 2.5 0 01-2.5 2.5h-13A2.5 2.5 0 013 16.5v-9z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 7l8 6 8-6" />
+                    </svg>
+                  )}
+                  {c.icon === 'phone' && (
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 4h3l1.5 4-2 1.5a14 14 0 006 6L15 13l4 1.5v3A2.5 2.5 0 0116.5 20C9.596 20 4 14.404 4 7.5A2.5 2.5 0 015 4z" />
+                    </svg>
+                  )}
+                  {c.icon === 'location' && (
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1116 0z" />
+                      <circle cx="12" cy="10" r="2.5" />
+                    </svg>
+                  )}
+                </span>
                 <div>
-                  <div className="text-xs font-mono text-gray-600 uppercase tracking-wider">{c.label}</div>
-                  <div className="text-sm text-gray-300">{c.value}</div>
+                  <div className="text-xs font-mono text-slate-700 uppercase tracking-wider">{c.label}</div>
+                  <div className="text-sm text-slate-900 font-medium">{c.value}</div>
                 </div>
               </div>
             ))}
