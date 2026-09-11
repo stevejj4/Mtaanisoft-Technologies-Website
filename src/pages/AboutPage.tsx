@@ -190,7 +190,7 @@ export default function AboutPage({ navigate }: { navigate: (p: Page) => void })
         </div>
       </section>
 
-      <section className="py-24 md:py-28 bg-primary">
+      <section className="section-dark py-32 md:py-28">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h2 className="font-display text-3xl font-bold text-white mb-4 tracking-tight">
             Work with Mtaanisoft
@@ -201,7 +201,7 @@ export default function AboutPage({ navigate }: { navigate: (p: Page) => void })
           <div className="flex flex-wrap justify-center gap-4">
             <button
               onClick={() => navigate('contact')}
-              className="bg-white text-primary font-semibold px-6 py-3 rounded-md hover:bg-emerald-50 transition-colors text-sm"
+              className="bg-primary text-white font-bold px-6 py-3 rounded-md hover:bg-primary/90 transition-colors text-sm"
             >
               Start a Project
             </button>
