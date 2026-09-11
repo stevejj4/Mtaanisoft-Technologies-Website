@@ -80,8 +80,8 @@ export default function Footer({ navigate }: FooterProps) {
           <h4 className="font-display font-bold text-white text-xs mb-5 uppercase tracking-wider">Contact</h4>
           <ul className="space-y-3">
             <li>
-              <a href="mailto:hello@mtaanisoft.co.ke" className="text-sm text-gray-200 hover:text-white transition-colors block">
-                hello@mtaanisoft.co.ke
+              <a href="mailto:jumaomondi16@gmail.com" className="text-sm text-gray-200 hover:text-white transition-colors block">
+                jumaomondi16@gmail.com
               </a>
             </li>
             <li>
