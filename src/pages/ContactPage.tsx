@@ -50,7 +50,7 @@ export default function ContactPage() {
           </div>
           <div className="space-y-5">
             {[
-              { icon: 'email', label: 'Email', value: 'hello@mtaanisoft.co.ke' },
+              { icon: 'email', label: 'Email', value: 'jumaomondi16@gmail.com' },
               { icon: 'phone', label: 'Primary', value: '+254 793 658 882' },
               { icon: 'phone', label: 'Alternative', value: '+254 748 144 900' },
               { icon: 'location', label: 'Location', value: 'Nairobi, Kenya' },
