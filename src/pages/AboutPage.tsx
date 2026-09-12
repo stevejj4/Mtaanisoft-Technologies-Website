@@ -114,7 +114,7 @@ export default function AboutPage({ navigate }: { navigate: (p: Page) => void })
           <div>
             <div className="font-mono text-xs text-primary uppercase tracking-wider mb-4">Vision</div>
             <p className="text-foreground leading-relaxed text-sm">
-              A Kenya where organizations at every scale have access to high-quality, purpose-built technology that actually fits their context and constraints.
+              An Economy where players at every scale have access to high-quality, purpose-built technology that actually fits their context and constraints.
             </p>
           </div>
           <div>
@@ -165,7 +165,7 @@ export default function AboutPage({ navigate }: { navigate: (p: Page) => void })
           <div>
             <span className="font-mono text-xs text-primary tracking-widest uppercase">Who we are</span>
             <h2 className="font-display text-3xl font-bold mt-3 mb-5 tracking-tight">
-              Based in Nairobi, working across Kenya and beyond.
+              We are Mtaanisoft Technologies, working across Kenya and beyond.
             </h2>
             <p className="text-gray-300 text-sm leading-relaxed mb-6">
               Mtaanisoft Technologies operates from Nairobi, Kenya. We work with clients across Kenya and East Africa, and we have a distributed contributor network of technical specialists.
