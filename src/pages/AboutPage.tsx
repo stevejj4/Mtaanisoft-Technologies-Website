@@ -19,7 +19,7 @@ const values = [
   },
 ]
 
-const clients = ['Waumini Insurance', 'Eco Pearl', 'Group Table Banking', 'Multiple Clients']
+const clients = ['Waumini Insurance', 'Eco Pearl', 'Our Innovations', 'Lookeey Photography']
 
 const focusAreas = [
   'Software Development',
