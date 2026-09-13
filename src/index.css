@@ -116,7 +116,7 @@ h1, h2, h3, h4, h5, h6 {
   100% { transform: translateX(-50%); }
 }
 .animate-marquee {
-  animation: marquee 10s linear infinite;
+  animation: marquee 25s linear infinite;
 }
 .animate-marquee:hover {
   animation-play-state: paused;
@@ -128,7 +128,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .animate-marquee-reverse {
-  animation: marquee-reverse 24s linear infinite;
+  animation: marquee-reverse 27s linear infinite;
 }
 
 .animate-marquee-reverse:hover {
