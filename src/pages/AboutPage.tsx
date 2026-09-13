@@ -130,7 +130,7 @@ export default function AboutPage({ navigate }: { navigate: (p: Page) => void })
       <section className="py-20 bg-secondary/40">
         <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-2xl mb-14">
-            <span className="font-mono text-xs text-primary tracking-widest uppercase">Engineering philosophy</span>
+            <span className="font-mono text-xs text-primary tracking-widest uppercase">Our Engineering philosophy</span>
             <h2 className="font-display text-3xl md:text-4xl font-bold mt-3 tracking-tight">How we think about building software</h2>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
