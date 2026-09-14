@@ -81,7 +81,7 @@ export default function Footer({ navigate }: FooterProps) {
           <ul className="space-y-3">
             <li>
               <a href="mailto:jumaomondi16@gmail.com" className="text-sm text-gray-200 hover:text-white transition-colors block">
-                jumaomondi16@gmail.com
+                mtaanisofttechnologies.@gmail.com
               </a>
             </li>
             <li>
