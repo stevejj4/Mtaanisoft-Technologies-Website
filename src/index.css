@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
 
 @import 'tailwindcss';
@@ -11,23 +13,41 @@
 
   --color-background: #F4F7FF;
   --color-foreground: #0B1D3E;
+
   --color-card: #FFFFFF;
   --color-card-foreground: #0B1D3E;
+
   --color-primary: #1B4DE8;
   --color-primary-foreground: #FFFFFF;
+
   --color-secondary: #EDF1FF;
   --color-secondary-foreground: #3B4F7A;
+
   --color-muted: #EDF1FF;
   --color-muted-foreground: #6B7A9E;
+
   --color-accent: #1B4DE8;
   --color-accent-foreground: #FFFFFF;
+
   --color-border: #DDE3F2;
   --color-ring: #1B4DE8;
+
   --color-navy: #0B1D3E;
 }
 
-html, body, #root {
+
+/* =========================================
+   Base
+   ========================================= */
+
+html,
+body,
+#root {
   height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -35,96 +55,286 @@ body {
   background-color: var(--color-background);
   color: var(--color-foreground);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display);
 }
 
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #C5CDE8; border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: #9AAACF; }
+
+/* =========================================
+   Scrollbar
+   ========================================= */
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C5CDE8;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9AAACF;
+}
+
+
+/* =========================================
+   Text
+   ========================================= */
 
 .text-blue-accent {
   color: #1B4DE8;
 }
 
-/* Card hover lift */
-.card-hover {
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
-.card-hover:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(27, 77, 232, 0.10);
-}
-
-/* Gradient blue text */
 .text-gradient-blue {
-  background: linear-gradient(135deg, #1B4DE8 0%, #0EA5E9 100%);
+  background: linear-gradient(
+    135deg,
+    #1B4DE8 0%,
+    #0EA5E9 100%
+  );
+
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Dark section */
+
+/* =========================================
+   Sections
+   ========================================= */
+
 .section-dark {
   background: #0B1D3E;
 }
 
-/* Pill button */
+
+/* =========================================
+   Cards
+   ========================================= */
+
+.card-hover {
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease,
+    border-color 200ms ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(27, 77, 232, 0.10);
+}
+
+
+/* =========================================
+   Buttons
+   ========================================= */
+
 .btn-primary {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+
   background: #0B1D3E;
   color: white;
+
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 14px;
+
   padding: 12px 24px;
   border-radius: 9999px;
-  transition: background 0.2s, transform 0.15s;
+
+  transition:
+    background-color 200ms ease,
+    transform 200ms ease;
 }
+
 .btn-primary:hover {
   background: #162D5A;
-  transform: translateY(-1px);
+  transform: translateY(-1px) scale(1.02);
 }
 
 .btn-outline {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+
   background: transparent;
   color: #0B1D3E;
+
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 14px;
+
   padding: 11px 24px;
   border-radius: 9999px;
+
   border: 2px solid #DDE3F2;
-  transition: border-color 0.2s, background 0.2s;
+
+  transition:
+    border-color 200ms ease,
+    background-color 200ms ease,
+    color 200ms ease;
 }
+
 .btn-outline:hover {
   border-color: #1B4DE8;
   color: #1B4DE8;
 }
 
-/* Scrolling marquee */
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+
+/* =========================================
+   Navigation
+   ========================================= */
+
+.nav-link {
+  position: relative;
+  transition: color 200ms ease;
 }
+
+.nav-link::after {
+  content: '';
+
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+
+  width: 0;
+  height: 2px;
+
+  background: currentColor;
+  border-radius: 999px;
+
+  transform: translateX(-50%);
+
+  transition: width 220ms ease;
+}
+
+.nav-link:hover::after {
+  width: 20px;
+}
+
+
+/* =========================================
+   CTA Arrow
+   ========================================= */
+
+.cta-arrow {
+  transition: transform 200ms ease;
+}
+
+.cta-button:hover .cta-arrow {
+  transform: translateX(4px);
+}
+
+
+/* =========================================
+   Hero Reveal
+   ========================================= */
+
+@keyframes heroReveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-reveal {
+  opacity: 0;
+  animation: heroReveal 700ms ease-out forwards;
+  will-change: transform, opacity;
+}
+
+.hero-delay-1 {
+  animation-delay: 100ms;
+}
+
+.hero-delay-2 {
+  animation-delay: 300ms;
+}
+
+.hero-delay-3 {
+  animation-delay: 500ms;
+}
+
+.hero-delay-4 {
+  animation-delay: 700ms;
+}
+
+
+/* =========================================
+   Ambient Hero Background
+   ========================================= */
+
+@keyframes ambientGlow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.30;
+  }
+
+  50% {
+    transform: translate3d(20px, -10px, 0) scale(1.05);
+    opacity: 0.50;
+  }
+}
+
+.ambient-glow {
+  animation: ambientGlow 12s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+
+/* =========================================
+   Marquee
+   ========================================= */
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 .animate-marquee {
   animation: marquee 25s linear infinite;
 }
+
 .animate-marquee:hover {
   animation-play-state: paused;
 }
 
+
 @keyframes marquee-reverse {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .animate-marquee-reverse {
@@ -135,19 +345,71 @@ h1, h2, h3, h4, h5, h6 {
   animation-play-state: paused;
 }
 
+
+/* =========================================
+   Ideate Animation
+   ========================================= */
+
 @keyframes ideate {
-  0%, 100% { transform: translateX(-8%) rotate(-3deg); opacity: 0.35; }
-  50% { transform: translateX(8%) rotate(3deg); opacity: 0.9; }
+  0%,
+  100% {
+    transform: translateX(-8%) rotate(-3deg);
+    opacity: 0.35;
+  }
+
+  50% {
+    transform: translateX(8%) rotate(3deg);
+    opacity: 0.9;
+  }
 }
 
 .animate-ideate {
   animation: ideate 7s ease-in-out infinite;
 }
 
+
+/* =========================================
+   Dropdown
+   ========================================= */
+
+@keyframes dropdownEnter {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-enter {
+  animation: dropdownEnter 180ms ease-out forwards;
+}
+
+
+/* =========================================
+   Accessibility
+   ========================================= */
+
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
   .animate-marquee,
   .animate-marquee-reverse,
-  .animate-ideate {
+  .animate-ideate,
+  .ambient-glow {
     animation: none;
   }
 }
