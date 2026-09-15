@@ -153,17 +153,12 @@ export default function ServicesPage({
           </span>
 
           <h1 className="hero-reveal hero-delay-2 font-display text-4xl md:text-6xl font-bold mt-4 tracking-tight max-w-3xl leading-tight">
-            We build, improve, and connect digital system.
+            We build, improve, and connect digital systems.
           </h1>
-
-          <p className="hero-reveal hero-delay-3 text-gray-400 mt-6 max-w-2xl text-lg md:text-xl leading-relaxed">
-            We help organizations build, modernize, connect, and improve the
-            digital systems behind their operations.
-          </p>
 
           <p className="hero-reveal hero-delay-4 text-gray-500 mt-4 max-w-2xl text-sm md:text-base leading-relaxed">
             From software development and digital transformation to data,
-            automation, and systems integration, we focus on practical
+            automation, and systems integration, we focus on building practical
             technology that creates measurable value.
           </p>
 
