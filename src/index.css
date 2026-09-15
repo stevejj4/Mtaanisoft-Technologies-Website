@@ -413,3 +413,23 @@ h6 {
     animation: none;
   }
 }
+@keyframes servicesMarquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-services-marquee {
+  display: flex;
+  width: max-content;
+  animation: servicesMarquee 27s linear infinite;
+  will-change: transform;
+}
+
+.animate-services-marquee:hover {
+  animation-play-state: paused;
+}
