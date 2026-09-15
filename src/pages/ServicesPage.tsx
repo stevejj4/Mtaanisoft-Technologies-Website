@@ -9,7 +9,7 @@ const services = [
   {
     number: '01',
     title: 'Software Development',
-    marqueeTitle: 'Software',
+    marqueeTitle: 'Software Development',
     tagline: 'Build the digital systems your organization needs.',
     desc: 'We design and build practical software for organizations that need better ways to operate, serve customers, manage information, or deliver their services. From new applications to modernizing existing systems, we take solutions from requirements through implementation.',
     items: [
@@ -153,7 +153,7 @@ export default function ServicesPage({
           </span>
 
           <h1 className="hero-reveal hero-delay-2 font-display text-4xl md:text-6xl font-bold mt-4 tracking-tight max-w-3xl leading-tight">
-            Technology that works for the way you work.
+            We build, improve, and connect digital system.
           </h1>
 
           <p className="hero-reveal hero-delay-3 text-gray-400 mt-6 max-w-2xl text-lg md:text-xl leading-relaxed">
