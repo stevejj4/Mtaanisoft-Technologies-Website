@@ -4,73 +4,73 @@ const services = [
   {
     number: '01',
     title: 'Software Development',
-    desc: 'We design and build practical software systems around real business and operational requirements.',
+    desc: 'We design and develop web applications, internal systems, platforms, APIs, and other software solutions from requirements through implementation.',
   },
   {
     number: '02',
     title: 'Digital Transformation',
-    desc: 'We help organizations modernize workflows, processes, and systems to work more effectively in a digital environment.',
+    desc: 'We help organizations assess existing workflows, digitize processes, introduce new systems, and transition to better ways of working.',
   },
   {
     number: '03',
-    title: 'AI Adoption & Automation',
-    desc: 'We identify opportunities to apply AI and automation to reduce repetitive work, improve productivity, and support better decisions.',
+    title: 'AI & Automation',
+    desc: 'We identify repetitive and information-heavy processes that can be automated or improved through AI-assisted workflows and tools.',
   },
   {
     number: '04',
     title: 'Data Solutions',
-    desc: 'We help organizations organize, manage, transform, and use their data to improve visibility and decision-making.',
+    desc: 'We build data collection, management, transformation, reporting, and analytics solutions that help organizations understand and use their information.',
   },
   {
     number: '05',
     title: 'Systems Integration',
-    desc: 'We connect systems, services, APIs, and workflows so information can move reliably across an organization.',
+    desc: 'We integrate applications, APIs, payment platforms, third-party services, and internal systems so information can move reliably between them.',
   },
 ]
 
 const approach = [
   {
     number: '01',
-    title: 'Understand',
-    desc: 'We work with stakeholders and users to understand the problem, the current workflow, and what needs to improve.',
+    title: 'Discover',
+    desc: 'We understand the organization, users, existing systems, processes, requirements, and the problem that needs to be solved.',
   },
   {
     number: '02',
-    title: 'Design',
-    desc: 'We translate those needs into clear requirements, user journeys, system designs, and an implementation plan.',
+    title: 'Define',
+    desc: 'We translate business needs into clear requirements, user stories, workflows, technical specifications, and a practical solution plan.',
   },
   {
     number: '03',
-    title: 'Build & Implement',
-    desc: 'We develop, integrate, test, and introduce the solution into the real working environment.',
+    title: 'Develop',
+    desc: 'We design, develop, integrate, test, and prepare the solution for real-world use.',
   },
   {
     number: '04',
-    title: 'Improve',
-    desc: 'We support users, learn from real-world use, and improve the solution as the organization evolves.',
+    title: 'Implement',
+    desc: 'We deploy the solution, support users, resolve issues, gather feedback, and make improvements as the system is adopted.',
   },
 ]
 
 const differentiators = [
   {
     number: '01',
-    title: 'Business understanding',
-    desc: 'We look beyond the technical requirement to understand the operational problem behind it.',
+    title: 'Understand the business',
+    desc: "We start with the organization's goals, processes, users, and constraints before deciding what technology is required.",
   },
   {
     number: '02',
-    title: 'Technical breadth',
-    desc: 'We work across software, data, automation, systems, APIs, and integration to turn ideas into working solutions.',
+    title: 'Build beyond the interface',
+    desc: 'Our work covers the systems behind the experience — applications, APIs, databases, data flows, integrations, automation, and supporting infrastructure.',
   },
   {
     number: '03',
-    title: 'Implementation mindset',
-    desc: 'A system only creates value when people can actually use it. We consider adoption, training, support, and real-world usage.',
+    title: 'Stay involved through implementation',
+    desc: "We don't consider a project finished when the code is delivered. Testing, deployment, training, support, and adoption are part of making the solution successful.",
   },
   {
     number: '04',
-    title: 'Long-term thinking',
-    desc: 'We build with maintainability, scalability, security, and future improvement in mind.',
+    title: 'Build for what comes next',
+    desc: "We consider maintainability, scalability, security, data quality, and future requirements so today's solution does not become tomorrow's limitation.",
   },
 ]
 
@@ -84,7 +84,7 @@ const clients = [
 const focusAreas = [
   'Software Development',
   'Digital Transformation',
-  'AI Adoption & Automation',
+  'AI & Automation',
   'Data Solutions',
   'Systems Integration',
 ]
@@ -118,37 +118,48 @@ export default function AboutPage({
               Mtaanisoft Technologies
             </div>
           </div>
+
+          {/* Ambient glow */}
+          <div className="ambient-glow absolute -right-24 top-20 h-72 w-72 rounded-full bg-primary/20 blur-3xl" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
           <div className="max-w-2xl">
 
-            <span className="font-mono text-xs text-primary tracking-widest uppercase">
+            <span className="hero-reveal hero-delay-1 font-mono text-xs text-primary tracking-widest uppercase">
               About Mtaanisoft
             </span>
 
             <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold mt-5 tracking-tight leading-[1.05]">
-              Practical technology for a stronger tomorrow.
+              <span className="hero-title-word">Practical</span>{' '}
+              <span className="hero-title-word">technology</span>{' '}
+              <span className="hero-title-word">for a</span>{' '}
+              <span className="hero-title-word text-primary">
+                stronger tomorrow.
+              </span>
             </h1>
 
-            <p className="mt-6 max-w-xl text-sm md:text-base leading-relaxed text-white/75">
-              Mtaanisoft Technologies is a Kenyan technology and digital
-              transformation company helping organizations turn operational
-              challenges into practical digital solutions.
+            <p className="hero-reveal hero-delay-3 mt-6 max-w-xl text-sm md:text-base leading-relaxed text-white/75">
+              Mtaanisoft Technologies is a Kenyan technology company that
+              designs, builds, and implements digital solutions for businesses
+              and organizations.
             </p>
 
-            <p className="mt-4 max-w-xl text-sm md:text-base leading-relaxed text-white/65">
-              We bring together software, data, automation, and systems
-              thinking to help organizations work smarter, operate more
-              effectively, and create better value.
+            <p className="hero-reveal hero-delay-4 mt-4 max-w-xl text-sm md:text-base leading-relaxed text-white/65">
+              From software development and digital transformation to data,
+              automation, and systems integration, we help organizations
+              improve how they operate and use technology.
             </p>
 
-            <div className="flex flex-wrap gap-3 mt-9">
+            <div className="hero-reveal hero-delay-4 flex flex-wrap gap-3 mt-9">
               <button
                 onClick={() => navigate('contact')}
-                className="btn-primary"
+                className="btn-primary cta-button"
               >
                 Start a Project
+                <span className="cta-arrow" aria-hidden="true">
+                  →
+                </span>
               </button>
 
               <a
@@ -249,40 +260,36 @@ export default function AboutPage({
               </span>
 
               <h2 className="font-display text-3xl md:text-4xl font-bold mt-3 tracking-tight leading-tight">
-                Technology should solve problems, not create new ones.
+                We are a technology company that
+                designs, builds, and implements digital solutions for
+                businesses and organizations.
               </h2>
             </div>
 
             <div className="space-y-5 text-sm md:text-base text-muted-foreground leading-relaxed">
 
               <p>
-                Mtaanisoft Technologies was built around a simple idea:
-                organizations need technology that fits the way they actually
-                work.
+                We work across software development, digital transformation,
+                data, automation, and systems integration — helping
+                organizations replace manual processes, improve existing
+                systems, connect information, and build new digital
+                capabilities.
               </p>
 
               <p>
-                We work with businesses and organizations to understand their
-                operations, identify opportunities for improvement, and build
-                or implement digital solutions that make work simpler, faster,
-                and more reliable.
-              </p>
-
-              <p>
-                Our work sits at the intersection of{' '}
-                <strong className="text-foreground">
-                  technology, business operations, data, and people.
-                </strong>{' '}
-                We believe meaningful digital transformation happens when all
-                four are considered together.
+                Our work is not limited to building software. We work with
+                organizations to understand their needs, translate them into
+                practical technical solutions, and help put those solutions
+                into use.
               </p>
 
             </div>
           </div>
 
+
           <div className="grid sm:grid-cols-3 gap-5 mt-16">
 
-            <div className="border border-border rounded-lg p-6">
+            <div className="border border-border rounded-lg p-6 card-hover">
               <div className="font-mono text-xs text-primary mb-4">
                 01
               </div>
@@ -292,12 +299,13 @@ export default function AboutPage({
               </h3>
 
               <p className="text-muted-foreground text-sm leading-relaxed">
-                Building and integrating digital systems that solve practical
-                problems.
+                Software and digital systems that solve practical
+                organizational problems.
               </p>
             </div>
 
-            <div className="border border-border rounded-lg p-6">
+
+            <div className="border border-border rounded-lg p-6 card-hover">
               <div className="font-mono text-xs text-primary mb-4">
                 02
               </div>
@@ -307,23 +315,24 @@ export default function AboutPage({
               </h3>
 
               <p className="text-muted-foreground text-sm leading-relaxed">
-                Understanding workflows and helping organizations improve how
-                work gets done.
+                Better workflows, processes, and ways of working through
+                digital solutions.
               </p>
             </div>
 
-            <div className="border border-border rounded-lg p-6">
+
+            <div className="border border-border rounded-lg p-6 card-hover">
               <div className="font-mono text-xs text-primary mb-4">
                 03
               </div>
 
               <h3 className="font-display font-semibold text-lg mb-2">
-                People
+                Data
               </h3>
 
               <p className="text-muted-foreground text-sm leading-relaxed">
-                Designing solutions around the people who use, manage, and
-                depend on them.
+                Organized and connected information that supports operations,
+                reporting, and decision-making.
               </p>
             </div>
 
@@ -339,26 +348,30 @@ export default function AboutPage({
         <div className="max-w-7xl mx-auto px-6">
 
           <div className="max-w-2xl mb-14">
+
             <span className="font-mono text-xs text-primary tracking-widest uppercase">
               What we do
             </span>
 
             <h2 className="font-display text-3xl md:text-4xl font-bold mt-3 tracking-tight">
-              Technology built around real organizational needs.
+              We build, improve, and connect digital systems.
             </h2>
 
             <p className="text-muted-foreground text-sm md:text-base leading-relaxed mt-5">
-              We help organizations move from manual, fragmented, or
-              inefficient ways of working to connected digital systems.
+              Mtaanisoft helps organizations develop new software, modernize
+              existing operations, automate repetitive work, manage their
+              data, and connect the systems they depend on.
             </p>
+
           </div>
+
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
 
             {services.map((service) => (
               <div
                 key={service.number}
-                className="bg-card border border-border rounded-lg p-6 hover:border-primary/40 transition-colors"
+                className="bg-card border border-border rounded-lg p-6 card-hover"
               >
                 <div className="font-mono text-xs text-primary mb-6">
                   {service.number}
@@ -376,12 +389,16 @@ export default function AboutPage({
 
           </div>
 
+
           <div className="mt-10">
             <button
               onClick={() => navigate('services')}
-              className="btn-outline text-sm"
+              className="btn-outline cta-button text-sm"
             >
-              Explore Our Services →
+              Explore Our Services
+              <span className="cta-arrow" aria-hidden="true">
+                →
+              </span>
             </button>
           </div>
 
@@ -402,17 +419,18 @@ export default function AboutPage({
             </span>
 
             <h2 className="font-display text-3xl md:text-4xl font-bold mt-3 tracking-tight">
-              From understanding the problem to making the solution work.
+              From idea to implementation.
             </h2>
 
             <p className="text-muted-foreground text-sm md:text-base leading-relaxed mt-5">
-              We combine business understanding with technical execution. Our
-              process helps ensure we are solving the right problem, building
-              the right solution, and creating something that works beyond
-              launch.
+              Every project starts differently. Some organizations need a new
+              system, others need to improve an existing process or connect
+              systems that already exist. We adapt our approach to the problem
+              while keeping the path from requirements to implementation clear.
             </p>
 
           </div>
+
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
 
@@ -439,9 +457,10 @@ export default function AboutPage({
 
           </div>
 
+
           <div className="mt-12 border-l-2 border-primary pl-5">
             <p className="font-display font-semibold text-base md:text-lg">
-              Practical solutions. Clear thinking. End-to-end ownership.
+              Clear requirements. Practical development. Real-world implementation.
             </p>
           </div>
 
@@ -458,31 +477,44 @@ export default function AboutPage({
           <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-start">
 
             <div>
+
               <span className="font-mono text-xs text-primary tracking-widest uppercase">
                 Why Mtaanisoft
               </span>
 
               <h2 className="font-display text-3xl md:text-4xl font-bold mt-3 tracking-tight">
-                More than a development agency.
+                We work across the problem, not just the software.
               </h2>
+
             </div>
 
+
             <div>
+
               <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
-                Technology creates value when it fits the organization behind
-                it. We combine technical execution with an understanding of
-                business operations, people, and implementation.
+                Organizations rarely have purely technical problems. A new
+                application may require process changes. A data problem may
+                require better systems. An automation opportunity may require
+                understanding how people currently work.
               </p>
+
+              <p className="text-muted-foreground text-sm md:text-base leading-relaxed mt-5">
+                Mtaanisoft brings these pieces together — combining technical
+                development with business and operational understanding to
+                deliver solutions that can actually be used.
+              </p>
+
             </div>
 
           </div>
+
 
           <div className="grid md:grid-cols-2 gap-5 mt-14">
 
             {differentiators.map((item) => (
               <div
                 key={item.number}
-                className="bg-card border border-border rounded-lg p-6 flex gap-5"
+                className="bg-card border border-border rounded-lg p-6 flex gap-5 card-hover"
               >
 
                 <div className="font-mono text-xs text-primary pt-1 shrink-0">
@@ -490,6 +522,7 @@ export default function AboutPage({
                 </div>
 
                 <div>
+
                   <h3 className="font-display font-semibold text-lg mb-2">
                     {item.title}
                   </h3>
@@ -497,6 +530,7 @@ export default function AboutPage({
                   <p className="text-muted-foreground text-sm leading-relaxed">
                     {item.desc}
                   </p>
+
                 </div>
 
               </div>
@@ -531,6 +565,7 @@ export default function AboutPage({
 
           </div>
 
+
           <div className="grid md:grid-cols-2 gap-6">
 
             {/* Client solutions */}
@@ -546,8 +581,8 @@ export default function AboutPage({
 
               <p className="text-white/65 text-sm leading-relaxed mb-7">
                 We work with organizations to understand their challenges and
-                build digital systems, workflows, and integrations that address
-                real operational needs.
+                build digital systems, workflows, and integrations that
+                address real operational needs.
               </p>
 
               <button
@@ -742,9 +777,12 @@ export default function AboutPage({
 
             <button
               onClick={() => navigate('contact')}
-              className="bg-primary text-white font-bold px-6 py-3 rounded-md hover:bg-primary/90 transition-colors text-sm"
+              className="bg-primary text-white font-bold px-6 py-3 rounded-md hover:bg-primary/90 transition-colors text-sm cta-button"
             >
-              Start a Project →
+              Start a Project
+              <span className="cta-arrow" aria-hidden="true">
+                →
+              </span>
             </button>
 
             <button
