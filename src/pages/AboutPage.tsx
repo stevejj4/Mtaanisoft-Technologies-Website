@@ -146,7 +146,7 @@ export default function AboutPage({
             </p>
 
             <p className="hero-reveal hero-delay-4 mt-4 max-w-xl text-sm md:text-base leading-relaxed text-white/65">
-              From software development and digital transformation to data,
+              From software development and digital transformation to data, Artificial Inteligence, 
               automation, and systems integration, we help organizations
               improve how they operate and use technology.
             </p>
@@ -270,7 +270,7 @@ export default function AboutPage({
 
               <p>
                 We work across software development, digital transformation,
-                data, automation, and systems integration — helping
+                data, Artificial Inteligence, automation, and systems integration — helping
                 organizations replace manual processes, improve existing
                 systems, connect information, and build new digital
                 capabilities.
