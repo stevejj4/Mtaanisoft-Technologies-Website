@@ -88,7 +88,13 @@ const focusAreas = [
   'Data Solutions',
   'Systems Integration',
 ]
-
+/**
+ * 
+ * @param param0 
+ * @returns 
+ * Receiving navigate from App.tsx
+ * Passing a function as a prop
+ */
 export default function AboutPage({
   navigate,
 }: {
@@ -146,7 +152,7 @@ export default function AboutPage({
             </p>
 
             <p className="hero-reveal hero-delay-4 mt-4 max-w-xl text-sm md:text-base leading-relaxed text-white/65">
-              From software development and digital transformation to data, Artificial Inteligence, 
+              From software development and digital transformation to data, Artificial Intelligence, 
               automation, and systems integration, we help organizations
               improve how they operate and use technology.
             </p>
@@ -181,7 +187,7 @@ export default function AboutPage({
       ========================================================= */}
       <section className="bg-white border-b border-border py-9">
         <p className="text-center font-mono text-[10px] text-muted-foreground uppercase tracking-widest mb-5">
-          Organizations we have worked with
+          Clients we have worked with
         </p>
 
         <div className="sr-only">
@@ -194,6 +200,7 @@ export default function AboutPage({
 
         <div className="overflow-hidden" aria-hidden="true">
           <div className="flex animate-marquee w-max">
+            // Repeat the clients list multiple times to create a continuous scrolling effect
             {[...clients, ...clients, ...clients, ...clients].map(
               (client, index) => (
                 <div
