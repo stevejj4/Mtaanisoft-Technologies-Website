@@ -46,8 +46,8 @@ const approach = [
   },
   {
     number: '04',
-    title: 'Implement',
-    desc: 'We deploy the solution, support users, resolve issues, gather feedback, and make improvements as the system is adopted.',
+    title: 'Deployment and Maintenance',
+    desc: ' We seamlessly deploy your solution, provide dedicated support, and continuously optimize the system around your users specific use cases.',
   },
 ]
 
