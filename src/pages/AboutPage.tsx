@@ -14,7 +14,7 @@ const services = [
   {
     number: '03',
     title: 'AI & Automation',
-    desc: 'We identify repetitive and information-heavy processes that can be automated or improved through AI-assisted workflows and tools.',
+    desc: 'We identify repetitive, information-heavy processes and transform them into intelligent, AI-assisted workflows that boost efficiency.',
   },
   {
     number: '04',
