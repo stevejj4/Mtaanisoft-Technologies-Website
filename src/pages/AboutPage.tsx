@@ -342,7 +342,7 @@ export default function AboutPage({
                 reporting, and decision-making.
               </p>
             </div>
-            // add mtaanisoft venture hub
+            {/* add mtaanisoft venture hub */}
 
           </div>
         </div>
