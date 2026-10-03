@@ -11,9 +11,11 @@ import {
 
 const app = express()
 const port = getPort()
-const missingFormConfig = getMissingEnv(
+const missingPersistenceConfig = getMissingEnv(
   'SUPABASE_URL',
   'SUPABASE_SERVICE_ROLE_KEY',
+)
+const missingNotificationConfig = getMissingEnv(
   'RESEND_API_KEY',
   'RESEND_FROM_EMAIL',
   'SALES_EMAIL',
@@ -137,9 +139,14 @@ app.use(
 
 app.listen(port, () => {
   console.info(`Mtaanisoft API listening on http://localhost:${port}`)
-  if (missingFormConfig.length > 0) {
+  if (missingPersistenceConfig.length > 0) {
     console.warn(
-      `Form submissions are disabled; set these backend variables in apps/backend/.env: ${missingFormConfig.join(', ')}`,
+      `Form submissions are disabled; set these backend variables in the backend environment: ${missingPersistenceConfig.join(', ')}`,
+    )
+  }
+  if (missingNotificationConfig.length > 0) {
+    console.warn(
+      `Form notifications are disabled; set these backend variables in the backend environment: ${missingNotificationConfig.join(', ')}`,
     )
   }
 })

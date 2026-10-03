@@ -158,7 +158,11 @@ export default function CareersPage() {
           </div>
 
           {submission?.success ? (
-            <div className="bg-card border border-primary/20 rounded-3xl p-12 text-center">
+            <div
+              role="status"
+              aria-live="polite"
+              className="bg-card border border-primary/20 rounded-3xl p-12 text-center"
+            >
               <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
                 <svg className="w-7 h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -275,9 +279,19 @@ export default function CareersPage() {
                   {submission.message}
                 </p>
               )}
-              <button type="submit" disabled={pending} className="btn-primary w-full justify-center py-3.5">
+              <button
+                type="submit"
+                disabled={pending}
+                aria-busy={pending}
+                className="btn-primary w-full justify-center py-3.5"
+              >
                 {pending ? 'Submitting…' : 'Submit Application'}
               </button>
+              {pending && (
+                <p role="status" aria-live="polite" className="text-sm text-muted-foreground text-center">
+                  Uploading your resume and securely saving your profile…
+                </p>
+              )}
             </form>
           )}
         </div>

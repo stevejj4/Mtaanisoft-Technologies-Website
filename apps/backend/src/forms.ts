@@ -4,7 +4,6 @@ import type { Request, Response } from 'express'
 import type { FileFilterCallback } from 'multer'
 import { Resend } from 'resend'
 import { z } from 'zod'
-import { getRequiredEnv } from './env.js'
 import { createSupabaseServerClient } from './supabase.js'
 
 const emailSchema = z.string().trim().email().max(254)
@@ -119,11 +118,7 @@ export async function submitProjectBrief(request: Request, response: Response) {
     })
   }
 
-  let saved = false
   try {
-    const salesEmail = getRequiredEnv('SALES_EMAIL')
-    const from = getRequiredEnv('RESEND_FROM_EMAIL')
-    const resend = new Resend(getRequiredEnv('RESEND_API_KEY'))
     const supabase = createSupabaseServerClient()
     const data = parsed.data
 
@@ -145,10 +140,42 @@ export async function submitProjectBrief(request: Request, response: Response) {
       .select('id')
       .single()
     if (databaseError) throw databaseError
-    saved = true
     console.info('Project brief saved to Supabase:', insertedBrief.id)
 
-    const { error: emailError } = await resend.emails.send({
+    const receipt = response.json({
+      success: true,
+      message:
+        'Your project brief has been received and securely saved. Our team will review it and reach out within 48 hours.',
+    })
+    void sendProjectBriefNotification(data)
+    return receipt
+  } catch (error) {
+    return sendResultError(response, error, 'Project brief submission')
+  }
+}
+
+async function sendProjectBriefNotification(
+  data: z.infer<typeof projectBriefSchema>,
+) {
+  const salesEmail = process.env.SALES_EMAIL?.trim()
+  const from = process.env.RESEND_FROM_EMAIL?.trim()
+  const apiKey = process.env.RESEND_API_KEY?.trim()
+  if (!salesEmail || !from || !apiKey) {
+    const missing = [
+      !salesEmail && 'SALES_EMAIL',
+      !from && 'RESEND_FROM_EMAIL',
+      !apiKey && 'RESEND_API_KEY',
+    ].filter((name): name is string => Boolean(name))
+    console.error(
+      'Project brief was saved, but its notification was not sent; missing backend environment variables:',
+      missing,
+    )
+    return
+  }
+
+  try {
+    const resend = new Resend(apiKey)
+    const { error } = await resend.emails.send({
       from,
       to: salesEmail,
       replyTo: data.email,
@@ -168,23 +195,17 @@ export async function submitProjectBrief(request: Request, response: Response) {
         </div>
       `,
     })
-    if (emailError) throw emailError
-
-    return response.json({
-      success: true,
-      message:
-        'Project brief received. Our team will review it and reach out within 48 hours.',
-    })
-  } catch (error) {
-    if (saved) {
-      console.error('Project brief saved, but email delivery failed:', error)
-      return response.json({
-        success: true,
-        message:
-          'Your project brief was received, but our notification email was delayed. We will review your submission.',
-      })
+    if (error) {
+      console.error(
+        'Project brief was saved, but its notification email failed:',
+        describeServiceError(error),
+      )
     }
-    return sendResultError(response, error, 'Project brief submission')
+  } catch (error) {
+    console.error(
+      'Project brief was saved, but its notification email failed:',
+      describeServiceError(error),
+    )
   }
 }
 
@@ -231,12 +252,8 @@ export async function submitTalentProfile(request: Request, response: Response) 
   let supabase: ReturnType<typeof createSupabaseServerClient> | undefined
   let storagePath: string | undefined
   let resumeUploaded = false
-  let profileSaved = false
   let stage = 'initialization'
   try {
-    const careersEmail = getRequiredEnv('CAREERS_EMAIL')
-    const from = getRequiredEnv('RESEND_FROM_EMAIL')
-    const resend = new Resend(getRequiredEnv('RESEND_API_KEY'))
     supabase = createSupabaseServerClient()
     const profile = parsed.data
     storagePath = `profiles/${randomUUID()}.${extension}`
@@ -277,61 +294,19 @@ export async function submitTalentProfile(request: Request, response: Response) 
       .select('id')
       .single()
     if (databaseError) throw databaseError
-    profileSaved = true
     console.info('Talent profile saved to Supabase:', {
       id: insertedProfile.id,
       resumeStoragePath: storagePath,
     })
 
-    stage = 'resume signed URL creation'
-    const { data: signedFile, error: signedUrlError } = await supabase.storage
-      .from('resumes')
-      .createSignedUrl(storagePath, 60 * 60 * 24 * 7)
-    if (signedUrlError) throw signedUrlError
-
-    stage = 'notification email'
-    const { error: emailError } = await resend.emails.send({
-      from,
-      to: careersEmail,
-      replyTo: profile.email,
-      subject: `[New Talent Profile] ${profile.name} - ${profile.expertise}`,
-      html: `
-        <div style="font-family:sans-serif;max-width:600px;color:#1e293b;line-height:1.5">
-          <h2>New Candidate Profile Submitted</h2>
-          <p><strong>Candidate:</strong> ${escapeHtml(profile.name)}</p>
-          <p><strong>Expertise:</strong> ${escapeHtml(profile.expertise)}</p>
-          <p><strong>Experience:</strong> ${escapeHtml(profile.experience)}</p>
-          <p><strong>Email:</strong> ${escapeHtml(profile.email)}</p>
-          <p><strong>Availability:</strong> ${escapeHtml(profile.availability)}</p>
-          <p><strong>Technologies:</strong> ${textBlock(profile.technologies)}</p>
-          <p><strong>GitHub:</strong> ${escapeHtml(profile.github || 'N/A')}</p>
-          <p><strong>Portfolio:</strong> ${escapeHtml(profile.portfolio || 'N/A')}</p>
-          <p><strong>LinkedIn:</strong> ${escapeHtml(profile.linkedin || 'N/A')}</p>
-          <h3>Profile Summary</h3><p>${textBlock(profile.intro)}</p>
-          <p><a href="${escapeHtml(signedFile.signedUrl)}">Download resume (expires in 7 days)</a></p>
-        </div>
-      `,
-    })
-    if (emailError) throw emailError
-
-    return response.json({
+    const receipt = response.json({
       success: true,
       message:
-        'Profile received. Our hiring team will get in touch when there is a matching opportunity.',
+        'Your profile and resume have been received and securely saved. Our hiring team will get in touch when there is a matching opportunity.',
     })
+    void sendTalentProfileNotification(profile, storagePath, supabase)
+    return receipt
   } catch (error) {
-    if (profileSaved) {
-      console.error(
-        'Talent profile saved, but post-save processing failed:',
-        describeServiceError(error),
-      )
-      return response.json({
-        success: true,
-        message:
-          'Your profile was received, but our notification email was delayed. We will review your submission.',
-      })
-    }
-
     if (resumeUploaded && supabase && storagePath) {
       const { error: cleanupError } = await supabase.storage
         .from('resumes')
@@ -360,6 +335,65 @@ export async function submitTalentProfile(request: Request, response: Response) 
       response,
       error,
       `Talent profile submission during ${stage}`,
+    )
+  }
+}
+
+async function sendTalentProfileNotification(
+  profile: z.infer<typeof talentProfileSchema>,
+  storagePath: string,
+  supabase: ReturnType<typeof createSupabaseServerClient>,
+) {
+  const careersEmail = process.env.CAREERS_EMAIL?.trim()
+  const from = process.env.RESEND_FROM_EMAIL?.trim()
+  const apiKey = process.env.RESEND_API_KEY?.trim()
+  if (!careersEmail || !from || !apiKey) {
+    const missing = [
+      !careersEmail && 'CAREERS_EMAIL',
+      !from && 'RESEND_FROM_EMAIL',
+      !apiKey && 'RESEND_API_KEY',
+    ].filter((name): name is string => Boolean(name))
+    console.error(
+      'Talent profile was saved, but its notification was not sent; missing backend environment variables:',
+      missing,
+    )
+    return
+  }
+
+  try {
+    const { data: signedFile, error: signedUrlError } = await supabase.storage
+      .from('resumes')
+      .createSignedUrl(storagePath, 60 * 60 * 24 * 7)
+    if (signedUrlError) throw signedUrlError
+
+    const resend = new Resend(apiKey)
+    const { error } = await resend.emails.send({
+      from,
+      to: careersEmail,
+      replyTo: profile.email,
+      subject: `[New Talent Profile] ${profile.name} - ${profile.expertise}`,
+      html: `
+        <div style="font-family:sans-serif;max-width:600px;color:#1e293b;line-height:1.5">
+          <h2>New Candidate Profile Submitted</h2>
+          <p><strong>Candidate:</strong> ${escapeHtml(profile.name)}</p>
+          <p><strong>Expertise:</strong> ${escapeHtml(profile.expertise)}</p>
+          <p><strong>Experience:</strong> ${escapeHtml(profile.experience)}</p>
+          <p><strong>Email:</strong> ${escapeHtml(profile.email)}</p>
+          <p><strong>Availability:</strong> ${escapeHtml(profile.availability)}</p>
+          <p><strong>Technologies:</strong> ${textBlock(profile.technologies)}</p>
+          <p><strong>GitHub:</strong> ${escapeHtml(profile.github || 'N/A')}</p>
+          <p><strong>Portfolio:</strong> ${escapeHtml(profile.portfolio || 'N/A')}</p>
+          <p><strong>LinkedIn:</strong> ${escapeHtml(profile.linkedin || 'N/A')}</p>
+          <h3>Profile Summary</h3><p>${textBlock(profile.intro)}</p>
+          <p><a href="${escapeHtml(signedFile.signedUrl)}">Download resume (expires in 7 days)</a></p>
+        </div>
+      `,
+    })
+    if (error) throw error
+  } catch (error) {
+    console.error(
+      'Talent profile was saved, but its notification email failed:',
+      describeServiceError(error),
     )
   }
 }

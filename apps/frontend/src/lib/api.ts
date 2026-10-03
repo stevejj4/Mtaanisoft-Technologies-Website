@@ -16,7 +16,9 @@ function isFormSubmission(value: unknown): value is FormSubmission {
 
 const apiUrl = (
   process.env.NEXT_PUBLIC_API_URL ??
-  (process.env.NODE_ENV === 'development' ? 'https://mtaanisoft-technologies-website.onrender.com.' : '')
+  (process.env.NODE_ENV === 'development'
+    ? 'https://mtaanisoft-technologies-website.onrender.com'
+    : '')
 ).replace(/\/$/, '')
 
 function getEndpoint(path: string) {

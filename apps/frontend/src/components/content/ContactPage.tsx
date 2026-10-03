@@ -111,7 +111,11 @@ export default function ContactPage() {
 
       <div className="max-w-3xl mx-auto px-6 py-16">
         {submission?.success ? (
-          <div className="bg-card border border-primary/30 rounded-lg p-12 text-center">
+          <div
+            role="status"
+            aria-live="polite"
+            className="bg-card border border-primary/30 rounded-lg p-12 text-center"
+          >
             <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
               <svg className="w-7 h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -242,10 +246,16 @@ export default function ContactPage() {
             <button
               type="submit"
               disabled={pending}
+              aria-busy={pending}
               className="w-full bg-primary text-white font-semibold py-3.5 rounded-md hover:bg-emerald-700 transition-colors text-sm"
             >
               {pending ? 'Submitting…' : 'Submit Project Brief'}
             </button>
+            {pending && (
+              <p role="status" aria-live="polite" className="text-sm text-muted-foreground text-center">
+                Sending your brief and saving your details…
+              </p>
+            )}
             <p className="text-xs text-muted-foreground text-center">
               By submitting this form, you agree to our{' '}
               <span className="text-primary underline cursor-pointer">Privacy Policy</span>.
