@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { postJson, type FormSubmission } from '@/lib/api'
 
 type FormData = {
   name: string
@@ -17,20 +18,41 @@ type FormData = {
 }
 
 export default function ContactPage() {
+  const [submission, setSubmission] = useState<FormSubmission | null>(null)
+  const [pending, setPending] = useState(false)
   const [form, setForm] = useState<FormData>({
     name: '', organization: '', email: '', phone: '',
     projectType: '', problem: '', solution: '',
     existingSystem: '', timeline: '', budget: '', notes: '',
   })
-  const [submitted, setSubmitted] = useState(false)
-
   const handleChange = (field: keyof FormData) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => setForm(f => ({ ...f, [field]: e.target.value }))
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setSubmitted(true)
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setPending(true)
+    setSubmission(null)
+    try {
+      const values = Object.fromEntries(
+        Array.from(new FormData(event.currentTarget).entries()).map(
+          ([key, value]) => [key, String(value)],
+        ),
+      )
+      setSubmission(
+        await postJson('/api/forms/project-brief', values),
+      )
+    } catch (error) {
+      setSubmission({
+        success: false,
+        message:
+          error instanceof Error
+            ? error.message
+            : 'The project brief could not be submitted. Please try again.',
+      })
+    } finally {
+      setPending(false)
+    }
   }
 
   const inputClass = 'w-full border border-border rounded-md px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors'
@@ -88,7 +110,7 @@ export default function ContactPage() {
       </div>
 
       <div className="max-w-3xl mx-auto px-6 py-16">
-        {submitted ? (
+        {submission?.success ? (
           <div className="bg-card border border-primary/30 rounded-lg p-12 text-center">
             <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
               <svg className="w-7 h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -97,7 +119,7 @@ export default function ContactPage() {
             </div>
             <h2 className="font-display font-bold text-2xl mb-3">Project brief received</h2>
             <p className="text-muted-foreground text-sm max-w-sm mx-auto leading-relaxed">
-              Thank you for submitting your project brief. Our team will review it and reach out within 48 hours to discuss next steps.
+              {submission.message}
             </p>
           </div>
         ) : (
@@ -114,21 +136,21 @@ export default function ContactPage() {
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
                   <label className={labelClass}>Full Name <span className="text-primary">*</span></label>
-                  <input required className={inputClass} value={form.name} onChange={handleChange('name')} placeholder="John Kamau" />
+                  <input required name="name" maxLength={200} className={inputClass} value={form.name} onChange={handleChange('name')} placeholder="John Kamau" />
                 </div>
                 <div>
                   <label className={labelClass}>Organization <span className="text-primary">*</span></label>
-                  <input required className={inputClass} value={form.organization} onChange={handleChange('organization')} placeholder="Acme Ltd." />
+                  <input required name="organization" maxLength={200} className={inputClass} value={form.organization} onChange={handleChange('organization')} placeholder="Acme Ltd." />
                 </div>
               </div>
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
                   <label className={labelClass}>Work Email <span className="text-primary">*</span></label>
-                  <input required type="email" className={inputClass} value={form.email} onChange={handleChange('email')} placeholder="john@acme.co.ke" />
+                  <input required name="email" type="email" maxLength={254} className={inputClass} value={form.email} onChange={handleChange('email')} placeholder="john@acme.co.ke" />
                 </div>
                 <div>
                   <label className={labelClass}>Phone</label>
-                  <input type="tel" className={inputClass} value={form.phone} onChange={handleChange('phone')} placeholder="+254 700 000 000" />
+                  <input name="phone" type="tel" maxLength={50} className={inputClass} value={form.phone} onChange={handleChange('phone')} placeholder="+254 700 000 000" />
                 </div>
               </div>
             </fieldset>
@@ -137,7 +159,7 @@ export default function ContactPage() {
               <legend className="font-display font-semibold text-sm px-2 text-muted-foreground uppercase tracking-wider">Project Details</legend>
               <div>
                 <label className={labelClass}>Project Type <span className="text-primary">*</span></label>
-                <select required className={inputClass} value={form.projectType} onChange={handleChange('projectType')}>
+                <select required name="projectType" className={inputClass} value={form.projectType} onChange={handleChange('projectType')}>
                   <option value="">Select project type</option>
                   <option>New software application</option>
                   <option>Digital transformation / process digitization</option>
@@ -152,7 +174,7 @@ export default function ContactPage() {
               <div>
                 <label className={labelClass}>Business Problem <span className="text-primary">*</span></label>
                 <textarea
-                  required rows={4} className={inputClass}
+                  required name="problem" maxLength={5000} rows={4} className={inputClass}
                   value={form.problem} onChange={handleChange('problem')}
                   placeholder="Describe the operational problem or challenge you are trying to solve. What is broken, slow, manual, or missing?"
                 />
@@ -161,7 +183,7 @@ export default function ContactPage() {
               <div>
                 <label className={labelClass}>Desired Outcome <span className="text-primary">*</span></label>
                 <textarea
-                  required rows={3} className={inputClass}
+                  required name="solution" maxLength={5000} rows={3} className={inputClass}
                   value={form.solution} onChange={handleChange('solution')}
                   placeholder="What does success look like? What should the solution enable your organization to do?"
                 />
@@ -169,7 +191,7 @@ export default function ContactPage() {
               <div>
                 <label className={labelClass}>Existing Systems</label>
                 <input
-                  className={inputClass} value={form.existingSystem} onChange={handleChange('existingSystem')}
+                  name="existingSystem" maxLength={1000} className={inputClass} value={form.existingSystem} onChange={handleChange('existingSystem')}
                   placeholder="What systems, tools, or platforms are currently in use? (ERP, CRM, accounting software, M-Pesa, etc.)"
                 />
                 <p className={hintClass}>This helps us understand integration requirements.</p>
@@ -181,7 +203,7 @@ export default function ContactPage() {
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
                   <label className={labelClass}>Expected Timeline</label>
-                  <select className={inputClass} value={form.timeline} onChange={handleChange('timeline')}>
+                  <select name="timeline" className={inputClass} value={form.timeline} onChange={handleChange('timeline')}>
                     <option value="">Select timeline</option>
                     <option>Under 1 month</option>
                     <option>1&ndash;3 months</option>
@@ -192,7 +214,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <label className={labelClass}>Budget Range</label>
-                  <select className={inputClass} value={form.budget} onChange={handleChange('budget')}>
+                  <select name="budget" className={inputClass} value={form.budget} onChange={handleChange('budget')}>
                     <option value="">Prefer not to say</option>
                     <option>Under KES 500,000</option>
                     <option>KES 500,000 &ndash; 1,500,000</option>
@@ -205,18 +227,24 @@ export default function ContactPage() {
               <div>
                 <label className={labelClass}>Additional Information</label>
                 <textarea
-                  rows={3} className={inputClass}
+                  name="notes" maxLength={5000} rows={3} className={inputClass}
                   value={form.notes} onChange={handleChange('notes')}
                   placeholder="Anything else that would help us understand your project, organization, or requirements."
                 />
               </div>
             </fieldset>
 
+            {submission && !submission.success && (
+              <p role="alert" className="text-sm text-red-700" aria-live="polite">
+                {submission.message}
+              </p>
+            )}
             <button
               type="submit"
+              disabled={pending}
               className="w-full bg-primary text-white font-semibold py-3.5 rounded-md hover:bg-emerald-700 transition-colors text-sm"
             >
-              Submit Project Brief
+              {pending ? 'Submitting…' : 'Submit Project Brief'}
             </button>
             <p className="text-xs text-muted-foreground text-center">
               By submitting this form, you agree to our{' '}

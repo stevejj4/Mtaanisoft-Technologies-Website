@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { postMultipart, type FormSubmission } from '@/lib/api'
 
 type FormData = {
   name: string
@@ -19,20 +20,39 @@ type FormData = {
 const steps = ['Discover', 'Apply', 'Review', 'Collaborate', 'Deliver']
 
 export default function CareersPage() {
+  const [submission, setSubmission] = useState<FormSubmission | null>(null)
+  const [pending, setPending] = useState(false)
   const [form, setForm] = useState<FormData>({
     name: '', email: '', expertise: '', experience: '',
     github: '', portfolio: '', linkedin: '',
     technologies: '', availability: '', intro: '',
   })
-  const [submitted, setSubmitted] = useState(false)
-
   const handleChange = (field: keyof FormData) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => setForm(f => ({ ...f, [field]: e.target.value }))
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setSubmitted(true)
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setPending(true)
+    setSubmission(null)
+    try {
+      setSubmission(
+        await postMultipart(
+          '/api/forms/talent-profile',
+          new FormData(event.currentTarget),
+        ),
+      )
+    } catch (error) {
+      setSubmission({
+        success: false,
+        message:
+          error instanceof Error
+            ? error.message
+            : 'The profile could not be submitted. Please try again.',
+      })
+    } finally {
+      setPending(false)
+    }
   }
 
   const inputClass = 'w-full border border-border rounded-xl px-4 py-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors'
@@ -137,7 +157,7 @@ export default function CareersPage() {
             </p>
           </div>
 
-          {submitted ? (
+          {submission?.success ? (
             <div className="bg-card border border-primary/20 rounded-3xl p-12 text-center">
               <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
                 <svg className="w-7 h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -146,7 +166,7 @@ export default function CareersPage() {
               </div>
               <h3 className="font-display font-bold text-2xl mb-3">Profile received</h3>
               <p className="text-muted-foreground text-sm max-w-sm mx-auto leading-relaxed">
-                Thank you for your interest in contributing to Mtaanisoft. We will review your profile and reach out when there is a project match.
+                {submission.message}
               </p>
             </div>
           ) : (
@@ -154,18 +174,18 @@ export default function CareersPage() {
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
                   <label className={labelClass}>Full Name <span className="text-primary">*</span></label>
-                  <input required className={inputClass} value={form.name} onChange={handleChange('name')} placeholder="Jane Muthoni" />
+                  <input required name="name" maxLength={200} className={inputClass} value={form.name} onChange={handleChange('name')} placeholder="Jane Muthoni" />
                 </div>
                 <div>
                   <label className={labelClass}>Email <span className="text-primary">*</span></label>
-                  <input required type="email" className={inputClass} value={form.email} onChange={handleChange('email')} placeholder="jane@example.com" />
+                  <input required name="email" type="email" maxLength={254} className={inputClass} value={form.email} onChange={handleChange('email')} placeholder="jane@example.com" />
                 </div>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
                   <label className={labelClass}>Area of Expertise <span className="text-primary">*</span></label>
-                  <select required className={inputClass} value={form.expertise} onChange={handleChange('expertise')}>
+                  <select required name="expertise" className={inputClass} value={form.expertise} onChange={handleChange('expertise')}>
                     <option value="">Select area</option>
                     <option>Frontend Development</option>
                     <option>Backend Development</option>
@@ -181,7 +201,7 @@ export default function CareersPage() {
                 </div>
                 <div>
                   <label className={labelClass}>Years of Experience <span className="text-primary">*</span></label>
-                  <select required className={inputClass} value={form.experience} onChange={handleChange('experience')}>
+                  <select required name="experience" className={inputClass} value={form.experience} onChange={handleChange('experience')}>
                     <option value="">Select range</option>
                     <option>1&ndash;2 years</option>
                     <option>3&ndash;5 years</option>
@@ -194,26 +214,26 @@ export default function CareersPage() {
               <div className="grid sm:grid-cols-3 gap-5">
                 <div>
                   <label className={labelClass}>GitHub</label>
-                  <input className={inputClass} value={form.github} onChange={handleChange('github')} placeholder="github.com/username" />
+                  <input name="github" maxLength={500} className={inputClass} value={form.github} onChange={handleChange('github')} placeholder="github.com/username" />
                 </div>
                 <div>
                   <label className={labelClass}>Portfolio</label>
-                  <input className={inputClass} value={form.portfolio} onChange={handleChange('portfolio')} placeholder="yoursite.com" />
+                  <input name="portfolio" maxLength={500} className={inputClass} value={form.portfolio} onChange={handleChange('portfolio')} placeholder="yoursite.com" />
                 </div>
                 <div>
                   <label className={labelClass}>LinkedIn</label>
-                  <input className={inputClass} value={form.linkedin} onChange={handleChange('linkedin')} placeholder="linkedin.com/in/..." />
+                  <input name="linkedin" maxLength={500} className={inputClass} value={form.linkedin} onChange={handleChange('linkedin')} placeholder="linkedin.com/in/..." />
                 </div>
               </div>
 
               <div>
                 <label className={labelClass}>Areas of expertise <span className="text-primary">*</span></label>
-                <input required className={inputClass} value={form.technologies} onChange={handleChange('technologies')} placeholder="Describe your areas of expertise" />
+                <input required name="technologies" maxLength={1000} className={inputClass} value={form.technologies} onChange={handleChange('technologies')} placeholder="Describe your areas of expertise" />
               </div>
 
               <div>
                 <label className={labelClass}>Availability <span className="text-primary">*</span></label>
-                <select required className={inputClass} value={form.availability} onChange={handleChange('availability')}>
+                <select required name="availability" className={inputClass} value={form.availability} onChange={handleChange('availability')}>
                   <option value="">Select availability</option>
                   <option>Full-time (40 hrs/week)</option>
                   <option>Part-time (20 hrs/week)</option>
@@ -225,25 +245,38 @@ export default function CareersPage() {
               <div>
                 <label className={labelClass}>Short Introduction <span className="text-primary">*</span></label>
                 <textarea
-                  required rows={4} className={inputClass}
+                  required name="intro" maxLength={5000} rows={4} className={inputClass}
                   value={form.intro} onChange={handleChange('intro')}
                   placeholder="Tell us about your background, the kinds of projects you enjoy, and why you want to contribute to Mtaanisoft."
                 />
               </div>
 
               <div>
-                <label className={labelClass}>Resume / CV</label>
+                <label htmlFor="resumeFile" className={labelClass}>Resume / CV <span className="text-primary">*</span></label>
                 <div className="border border-dashed border-border rounded-xl px-4 py-6 text-center bg-secondary/30">
                   <svg className="w-8 h-8 text-muted-foreground mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
-                  <p className="text-sm text-muted-foreground">Drop your CV here or <span className="text-primary underline cursor-pointer">browse</span></p>
+                  <p className="text-sm text-muted-foreground mb-3">Choose a CV to upload</p>
+                  <input
+                    required
+                    id="resumeFile"
+                    name="resumeFile"
+                    type="file"
+                    accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                    className="mx-auto block max-w-full text-sm"
+                  />
                   <p className="text-xs text-muted-foreground mt-1">PDF, DOCX up to 5MB</p>
                 </div>
               </div>
 
-              <button type="submit" className="btn-primary w-full justify-center py-3.5">
-                Submit Application
+              {submission && !submission.success && (
+                <p role="alert" className="text-sm text-red-700" aria-live="polite">
+                  {submission.message}
+                </p>
+              )}
+              <button type="submit" disabled={pending} className="btn-primary w-full justify-center py-3.5">
+                {pending ? 'Submitting…' : 'Submit Application'}
               </button>
             </form>
           )}
