@@ -19,19 +19,38 @@ const missingFormConfig = getMissingEnv(
   'SALES_EMAIL',
   'CAREERS_EMAIL',
 )
-const frontendOrigins = (
-  process.env.FRONTEND_ORIGIN ??
-  'http://localhost:3000,http://localhost:3001,http://127.0.0.1:3000,http://127.0.0.1:3001'
-)
+function normalizeOrigin(value: string) {
+  try {
+    const url = new URL(value.trim())
+    if (url.protocol !== 'http:' && url.protocol !== 'https:') return null
+    return url.origin
+  } catch {
+    return null
+  }
+}
+
+const configuredOrigins = (process.env.FRONTEND_ORIGIN ?? '')
   .split(',')
-  .map((origin) => origin.trim())
-  .filter(Boolean)
+  .map(normalizeOrigin)
+  .filter((origin): origin is string => origin !== null)
+const frontendOrigins = new Set([
+  ...configuredOrigins,
+  'https://mtaanisoft.co.ke',
+  'https://www.mtaanisoft.co.ke',
+  'https://mtaanisoft-git-main-stevejj4s-projects.vercel.app',
+  'http://localhost:3000',
+  'http://localhost:3001',
+  'http://127.0.0.1:3000',
+  'http://127.0.0.1:3001',
+])
 
 app.disable('x-powered-by')
 app.use(
   cors({
     origin(origin, callback) {
-      if (!origin || frontendOrigins.includes(origin)) return callback(null, true)
+      if (!origin || frontendOrigins.has(normalizeOrigin(origin) ?? '')) {
+        return callback(null, true)
+      }
       callback(new Error('Origin is not allowed by the backend CORS policy.'))
     },
   }),

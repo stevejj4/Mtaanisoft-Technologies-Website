@@ -57,7 +57,7 @@ export async function postJson(
   } catch {
     throw new Error(
       apiUrl
-        ? `Could not connect to the backend API at ${apiUrl}. Check that the backend is running and NEXT_PUBLIC_API_URL is correct.`
+        ? `The request to ${apiUrl} was blocked or could not reach the backend. Check the backend status and CORS configuration for this website's origin.`
         : 'The backend API URL is not configured for this deployment.',
     )
   }
@@ -77,7 +77,7 @@ export async function postMultipart(
   } catch {
     throw new Error(
       apiUrl
-        ? `Could not connect to the backend API at ${apiUrl}. Check that the backend is running and NEXT_PUBLIC_API_URL is correct.`
+        ? `The request to ${apiUrl} was blocked or could not reach the backend. Check the backend status and CORS configuration for this website's origin.`
         : 'The backend API URL is not configured for this deployment.',
     )
   }
