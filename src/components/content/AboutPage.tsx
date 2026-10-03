@@ -1,4 +1,4 @@
-import type { Page } from '../App'
+import Link from 'next/link'
 
 const services = [
   {
@@ -88,18 +88,7 @@ const focusAreas = [
   'Data Solutions',
   'Systems Integration',
 ]
-/**
- * 
- * @param param0 
- * @returns 
- * Receiving navigate from App.tsx
- * Passing a function as a prop
- */
-export default function AboutPage({
-  navigate,
-}: {
-  navigate: (p: Page) => void
-}) {
+export default function AboutPage() {
   const heroPhoto =
     'https://images.unsplash.com/photo-1604933762021-54a5858c9832?w=1600&h=1000&fit=crop&auto=format'
 
@@ -117,7 +106,7 @@ export default function AboutPage({
             className="h-full w-full object-cover object-center opacity-40"
           />
 
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0B1D3E] via-[#0B1D3E]/95 to-[#0B1D3E]/25" />
+          <div className="absolute inset-0 bg-linear-to-r from-[#0B1D3E] via-[#0B1D3E]/95 to-[#0B1D3E]/25" />
 
           <div className="absolute inset-0 hidden items-center justify-center overflow-hidden md:flex">
             <div className="whitespace-nowrap text-white/10 text-5xl lg:text-7xl font-display font-bold tracking-tight">
@@ -158,15 +147,15 @@ export default function AboutPage({
             </p>
 
             <div className="hero-reveal hero-delay-4 flex flex-wrap gap-3 mt-9">
-              <button
-                onClick={() => navigate('contact')}
+              <Link
+                href="/contact"
                 className="btn-primary cta-button"
               >
                 Start a Project
                 <span className="cta-arrow" aria-hidden="true">
                   →
                 </span>
-              </button>
+              </Link>
 
               <a
                 href="#who-we-are"
@@ -400,15 +389,15 @@ export default function AboutPage({
 
 
           <div className="mt-10">
-            <button
-              onClick={() => navigate('services')}
+            <Link
+              href="/services"
               className="btn-outline cta-button text-sm"
             >
               Explore Our Services
               <span className="cta-arrow" aria-hidden="true">
                 →
               </span>
-            </button>
+            </Link>
           </div>
 
         </div>
@@ -594,13 +583,13 @@ export default function AboutPage({
                 address real operational needs.
               </p>
 
-              <button
-                onClick={() => navigate('projects')}
+              <Link
+                href="/projects"
                 className="inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-primary transition-colors"
               >
                 View Projects
                 <span aria-hidden="true">→</span>
-              </button>
+              </Link>
 
             </div>
 
@@ -622,13 +611,13 @@ export default function AboutPage({
                 that use them.
               </p>
 
-              <button
-                onClick={() => navigate('products')}
+              <Link
+                href="/products"
                 className="inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-primary transition-colors"
               >
                 Explore Products
                 <span aria-hidden="true">→</span>
-              </button>
+              </Link>
 
             </div>
 
@@ -784,22 +773,22 @@ export default function AboutPage({
 
           <div className="flex flex-wrap justify-center gap-4">
 
-            <button
-              onClick={() => navigate('contact')}
+            <Link
+              href="/contact"
               className="bg-primary text-white font-bold px-6 py-3 rounded-md hover:bg-primary/90 transition-colors text-sm cta-button"
             >
               Start a Project
               <span className="cta-arrow" aria-hidden="true">
                 →
               </span>
-            </button>
+            </Link>
 
-            <button
-              onClick={() => navigate('services')}
+            <Link
+              href="/services"
               className="border border-white/30 text-white font-medium px-6 py-3 rounded-md hover:border-white/60 transition-colors text-sm"
             >
               Explore Our Services
-            </button>
+            </Link>
 
           </div>
 

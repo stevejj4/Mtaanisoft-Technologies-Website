@@ -1,4 +1,4 @@
-import type { Page } from '../App'
+import Link from 'next/link'
 
 const posts = [
   {
@@ -13,7 +13,7 @@ const posts = [
   },
 ]
 
-export default function BlogPage({ navigate }: { navigate: (p: Page) => void }) {
+export default function BlogPage() {
   return (
     <div>
       <header className="section-dark text-white">
@@ -30,7 +30,7 @@ export default function BlogPage({ navigate }: { navigate: (p: Page) => void }) 
               <span className="font-mono text-[10px] text-primary uppercase tracking-widest">{post.category}</span>
               <h2 className="font-display text-2xl font-bold mt-4 tracking-tight">{post.title}</h2>
               <p className="text-muted-foreground text-sm leading-relaxed mt-4">{post.summary}</p>
-              <button onClick={() => navigate('contact')} className="btn-outline mt-7 text-sm">Talk to us about this</button>
+              <Link href="/contact" className="btn-outline mt-7 text-sm">Talk to us about this</Link>
             </article>
           ))}
         </div>

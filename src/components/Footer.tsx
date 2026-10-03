@@ -1,4 +1,4 @@
-import type { Page } from '../App'
+import type { Page } from '@/lib/routes'
 
 interface FooterProps {
   navigate: (p: Page) => void

@@ -1,5 +1,3 @@
-import type { Page } from '../App'
-
 const sections = [
   {
     title: 'Acceptance of terms',
@@ -77,7 +75,7 @@ Email: **legal@mtaanisoft.co.ke**`,
   },
 ]
 
-export default function TermsPage({ navigate: _navigate }: { navigate: (p: Page) => void }) {
+export default function TermsPage() {
   return (
     <div>
       <div className="hero-mesh dot-grid text-white">
@@ -107,7 +105,7 @@ export default function TermsPage({ navigate: _navigate }: { navigate: (p: Page)
                       __html: para
                         .trim()
                         .replace(/\*\*(.+?)\*\*/g, '<strong class="text-foreground font-medium">$1</strong>')
-                        .replace(/^- (.+)/gm, '<span class="flex gap-2 mt-1"><span class="text-primary flex-shrink-0">&#x2022;</span><span>$1</span></span>')
+                        .replace(/^- (.+)/gm, '<span class="flex gap-2 mt-1"><span class="text-primary shrink-0">&#x2022;</span><span>$1</span></span>')
                         .replace(/\n/g, '<br/>')
                     }}
                   />

@@ -1,5 +1,7 @@
+'use client'
+
+import Link from 'next/link'
 import { useState } from 'react'
-import type { Page } from '../App'
 
 type FormData = {
   name: string
@@ -16,7 +18,7 @@ type FormData = {
 
 const steps = ['Discover', 'Apply', 'Review', 'Collaborate', 'Deliver']
 
-export default function CareersPage({ navigate }: { navigate: (p: Page) => void }) {
+export default function CareersPage() {
   const [form, setForm] = useState<FormData>({
     name: '', email: '', expertise: '', experience: '',
     github: '', portfolio: '', linkedin: '',
@@ -257,12 +259,12 @@ export default function CareersPage({ navigate }: { navigate: (p: Page) => void 
           <p className="text-white/70 text-sm mb-6 max-w-sm mx-auto">
             If you have a technology challenge, talk to us about building a solution.
           </p>
-          <button
-            onClick={() => navigate('contact')}
+          <Link
+            href="/contact"
             className="bg-white text-primary font-semibold px-6 py-3 rounded-full hover:bg-blue-50 transition-colors text-sm"
           >
             Start a Project
-          </button>
+          </Link>
         </div>
       </section>
     </div>

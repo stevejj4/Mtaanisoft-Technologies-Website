@@ -1,4 +1,4 @@
-import type { Page } from '../App'
+import Link from 'next/link'
 
 
 /* =========================================================
@@ -131,11 +131,7 @@ const processSteps = [
    SERVICES PAGE
 ========================================================= */
 
-export default function ServicesPage({
-  navigate,
-}: {
-  navigate: (p: Page) => void
-}) {
+export default function ServicesPage() {
   return (
     <div className="overflow-x-hidden">
 
@@ -404,7 +400,7 @@ export default function ServicesPage({
                         className="flex items-start gap-3 text-sm text-foreground/80"
                       >
 
-                        <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 mt-2" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0 mt-2" />
 
                         <span>
                           {item}
@@ -519,8 +515,8 @@ export default function ServicesPage({
 
             <div className="flex flex-col sm:flex-row gap-3 mt-8">
 
-              <button
-                onClick={() => navigate('contact')}
+              <Link
+                href="/contact"
                 className="bg-white text-primary font-semibold px-7 py-3 rounded-md hover:bg-white/90 transition-colors inline-flex items-center justify-center gap-2 cta-button"
               >
 
@@ -530,15 +526,15 @@ export default function ServicesPage({
                   →
                 </span>
 
-              </button>
+              </Link>
 
 
-              <button
-                onClick={() => navigate('about')}
+              <Link
+                href="/"
                 className="border border-white/30 text-white font-medium px-7 py-3 rounded-md hover:bg-white/10 transition-colors"
               >
                 Learn About Mtaanisoft
-              </button>
+              </Link>
 
             </div>
 

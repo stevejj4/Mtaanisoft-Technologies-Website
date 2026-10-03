@@ -1,5 +1,7 @@
+'use client'
+
+import Link from 'next/link'
 import { useState } from 'react'
-import type { Page } from '../App'
 
 /* ─── Project data ─────────────────────────────────────────────────────────── */
 const projects = [
@@ -240,7 +242,11 @@ function WasteMockup() {
 const mockups = [QuotationMockup, ChamaMockup, ChatBotMockup, WasteMockup]
 
 /* ─── Component ────────────────────────────────────────────────────────────── */
-export default function ProjectsPage({ navigate, view }: { navigate: (p: Page) => void; view?: 'clients' | 'innovations' }) {
+export default function ProjectsPage({
+  view,
+}: {
+  view?: 'clients' | 'innovations'
+}) {
   const [filter, setFilter] = useState('All')
   const [selected, setSelected] = useState<string | null>(null)
 
@@ -302,7 +308,7 @@ export default function ProjectsPage({ navigate, view }: { navigate: (p: Page) =
                 >
                   <div className="flex items-stretch">
                     {/* Colored accent strip */}
-                    <div className="w-1.5 flex-shrink-0" style={{ background: p.accent }} />
+                    <div className="w-1.5 shrink-0" style={{ background: p.accent }} />
 
                     <div className="flex-1 p-6 hover:bg-secondary/30 transition-colors">
                       <div className="flex flex-wrap items-start justify-between gap-4">
@@ -323,8 +329,8 @@ export default function ProjectsPage({ navigate, view }: { navigate: (p: Page) =
                             </p>
                           )}
                         </div>
-                        <div className="flex items-center gap-3 flex-shrink-0">
-                          <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center transition-all flex-shrink-0 ${isOpen ? 'border-primary bg-primary/10 text-primary' : 'border-border text-muted-foreground group-hover:border-foreground/30'}`}>
+                        <div className="flex items-center gap-3 shrink-0">
+                          <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center transition-all shrink-0 ${isOpen ? 'border-primary bg-primary/10 text-primary' : 'border-border text-muted-foreground group-hover:border-foreground/30'}`}>
                             <svg className={`w-3.5 h-3.5 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                               <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                             </svg>
@@ -359,7 +365,7 @@ export default function ProjectsPage({ navigate, view }: { navigate: (p: Page) =
                             <ul className="space-y-2">
                               {p.features.map(f => (
                                 <li key={f} className="flex items-start gap-2 text-sm">
-                                  <svg className="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} style={{ color: p.accent }}>
+                                  <svg className="w-4 h-4 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} style={{ color: p.accent }}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                                   </svg>
                                   {f}
@@ -376,12 +382,12 @@ export default function ProjectsPage({ navigate, view }: { navigate: (p: Page) =
                         <div className="flex-1">
                           <Mockup />
                         </div>
-                        <button
-                          onClick={() => navigate('contact')}
+                        <Link
+                          href="/contact"
                           className="w-full border border-border rounded-xl py-2.5 text-sm font-medium text-foreground hover:bg-secondary/60 transition-colors mt-auto inline-flex items-center justify-center gap-2"
                         >
                           Read More <span aria-hidden="true">&rarr;</span>
-                        </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -401,12 +407,12 @@ export default function ProjectsPage({ navigate, view }: { navigate: (p: Page) =
           <p className="text-white/50 mb-8 max-w-sm mx-auto text-sm leading-relaxed">
             Tell us what you are trying to build or solve. We will respond within 48 hours with an initial assessment.
           </p>
-          <button
-            onClick={() => navigate('contact')}
+          <Link
+            href="/contact"
             className="bg-primary text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-emerald-600 transition-all hover:shadow-lg hover:shadow-primary/30"
           >
             Start a Project
-          </button>
+          </Link>
         </div>
       </section>
     </div>
