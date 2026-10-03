@@ -127,7 +127,7 @@ export async function submitProjectBrief(request: Request, response: Response) {
     const supabase = createSupabaseServerClient()
     const data = parsed.data
 
-    const { error: databaseError } = await supabase
+    const { data: insertedBrief, error: databaseError } = await supabase
       .from('project_briefs')
       .insert({
         full_name: data.name,
@@ -142,8 +142,11 @@ export async function submitProjectBrief(request: Request, response: Response) {
         budget_range: data.budget,
         additional_information: data.notes,
       })
+      .select('id')
+      .single()
     if (databaseError) throw databaseError
     saved = true
+    console.info('Project brief saved to Supabase:', insertedBrief.id)
 
     const { error: emailError } = await resend.emails.send({
       from,
@@ -256,7 +259,7 @@ export async function submitTalentProfile(request: Request, response: Response) 
     resumeUploaded = true
 
     stage = 'profile database insert'
-    const { error: databaseError } = await supabase
+    const { data: insertedProfile, error: databaseError } = await supabase
       .from('talent_profiles')
       .insert({
         full_name: profile.name,
@@ -271,8 +274,14 @@ export async function submitTalentProfile(request: Request, response: Response) 
         profile_summary: profile.intro,
         resume_storage_path: storagePath,
       })
+      .select('id')
+      .single()
     if (databaseError) throw databaseError
     profileSaved = true
+    console.info('Talent profile saved to Supabase:', {
+      id: insertedProfile.id,
+      resumeStoragePath: storagePath,
+    })
 
     stage = 'resume signed URL creation'
     const { data: signedFile, error: signedUrlError } = await supabase.storage

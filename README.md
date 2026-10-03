@@ -16,6 +16,10 @@ npm run dev
 
 The frontend is available at `http://localhost:3000`; the API listens at
 `http://localhost:4000`. The backend health endpoint is `GET /health`.
+For production, set `NEXT_PUBLIC_API_URL` to the publicly reachable deployed
+backend base URL in the frontend's build environment, and set `FRONTEND_ORIGIN`
+to the deployed website origin in the backend environment. Rebuild/redeploy
+the frontend after changing `NEXT_PUBLIC_API_URL`.
 
 Copy `apps/frontend/.env.example` to `apps/frontend/.env.local` and
 `apps/backend/.env.example` to `apps/backend/.env` (for example, using
@@ -28,6 +32,11 @@ Restart the backend after changing environment variables. Never use a
 Run `supabase/schema.sql` in the Supabase SQL editor to create the submission
 tables and private resume bucket. Both the backend and Supabase configuration
 must be ready before form submissions can be persisted.
+
+Talent profile text is inserted in the `talent_profiles` table. Resume files
+are uploaded to the private `resumes` Supabase Storage bucket; the database
+stores their `resume_storage_path`, not the file bytes. Run the SQL setup
+against the same Supabase project configured in the deployed backend.
 
 If resume uploads return a storage 404, verify that `SUPABASE_URL` points to
 the same Supabase project where `supabase/schema.sql` was run, and confirm the
