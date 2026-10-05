@@ -27,14 +27,25 @@ redeploy/restart the backend after changing `FRONTEND_ORIGIN`.
 Copy `apps/frontend/.env.example` to `apps/frontend/.env.local` and
 `apps/backend/.env.example` to `apps/backend/.env` (for example, using
 `Copy-Item` in PowerShell). `.env.example` files are templates and are not
-loaded automatically. Set the Supabase service role key, Resend API key,
-verified sender, and recipient addresses in the backend environment only.
-Restart the backend after changing environment variables. Never use a
-`NEXT_PUBLIC_` prefix for backend secrets.
+loaded automatically. Set `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` in
+the backend environment to persist submissions. Set `RESEND_API_KEY`,
+`RESEND_FROM_EMAIL`, `SALES_EMAIL`, and `CAREERS_EMAIL` there to enable
+notification emails. In production, configure these values in the backend
+hosting provider's environment settings; local `.env` files are not deployed.
+Restart or redeploy the backend after changing environment variables. Never
+use a `NEXT_PUBLIC_` prefix for backend secrets.
 
 Run `supabase/schema.sql` in the Supabase SQL editor to create the submission
 tables and private resume bucket. Both the backend and Supabase configuration
 must be ready before form submissions can be persisted.
+
+The forms confirm receipt after the submission has been saved (and, for a
+talent profile, after its resume has also been uploaded). Email notifications
+are sent after that confirmation; a missing or failed email configuration
+does not undo a saved submission or block the user's receipt message. Missing
+Supabase persistence settings prevent submissions from being saved, so the
+backend returns an error instead of confirming receipt. Check backend startup
+and runtime logs for warnings about missing settings or notification failures.
 
 Talent profile text is inserted in the `talent_profiles` table. Resume files
 are uploaded to the private `resumes` Supabase Storage bucket; the database
