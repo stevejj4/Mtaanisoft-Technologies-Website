@@ -6,10 +6,11 @@ interface NavProps {
   navigate: (p: Page) => void
 }
 
+// 5 items total (Careers is completely gone)
 const navItems: { label: string; page: Page }[] = [
   { label: 'About Us', page: 'about' },
   { label: 'Services', page: 'services' },
-  { label: 'Careers', page: 'careers' },
+  { label: 'Projects', page: 'projects' },
   { label: 'Contact Us', page: 'contact' },
   { label: 'Blogs', page: 'blogs' },
 ]
@@ -66,12 +67,15 @@ export default function Nav({ page, navigate }: NavProps) {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-0.5">
+          {/* Renders: About Us, Services */}
           {navItems.slice(0, 2).map(item => (
             <button key={item.page} onClick={() => go(item.page)} className={`relative text-[13.5px] font-medium px-3.5 py-2 transition-colors rounded-md ${page === item.page ? 'text-primary' : 'text-foreground/70 hover:text-foreground'}`}>
               {item.label}
               {page === item.page && <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-primary rounded-full" />}
             </button>
           ))}
+          
+          {/* Projects Dropdown Menu Toggle */}
           <div className="relative" onMouseEnter={() => setProjectsOpen(true)} onMouseLeave={() => setProjectsOpen(false)}>
             <button
               onClick={() => setProjectsOpen(value => !value)}
@@ -90,7 +94,9 @@ export default function Nav({ page, navigate }: NavProps) {
               </div>
             )}
           </div>
-          {navItems.slice(2).map(item => (
+
+          {/* Fixed Index Slice: Grabs index 3 onwards (Contact Us, Blogs) */}
+          {navItems.slice(3).map(item => (
             <button key={item.page} onClick={() => go(item.page)} className={`relative text-[13.5px] font-medium px-3.5 py-2 transition-colors rounded-md ${page === item.page ? 'text-primary' : 'text-foreground/70 hover:text-foreground'}`}>
               {item.label}
               {page === item.page && <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-primary rounded-full" />}
@@ -152,16 +158,12 @@ export default function Nav({ page, navigate }: NavProps) {
                 <button onClick={() => go('innovations')} className="text-left px-3 py-2 text-sm text-muted-foreground hover:text-primary">Our Innovations</button>
               </div>
             )}
-            {navItems.slice(2).map(item => (
+            {/* Fixed Index Slice for Mobile drawer */}
+            {navItems.slice(3).map(item => (
               <button key={item.page} onClick={() => go(item.page)} className={`text-sm font-medium text-left px-4 py-3 rounded-xl transition-colors ${page === item.page ? 'text-primary bg-primary/8 font-semibold' : 'text-foreground hover:bg-secondary'}`}>
                 {item.label}
               </button>
             ))}
-          </div>
-          <div className="mt-4 pt-4 border-t border-border">
-            <button onClick={() => go('contact')} className="btn-primary w-full justify-center">
-              Start a Project
-            </button>
           </div>
         </div>
       )}
